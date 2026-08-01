@@ -1,0 +1,23 @@
+
+.container-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+
+.category-conatiner{
+     width: 90%;
+     max-width: 1200px;
+     min-height: 180px;
+     padding: 10px;
+     margin:5px;
+}
+
+.category-cards{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:5px;
+}

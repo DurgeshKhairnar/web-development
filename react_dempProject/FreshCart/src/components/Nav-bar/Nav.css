@@ -1,0 +1,120 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar Container */
+.nav-container {
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Navbar */
+nav {
+  max-width: 1200px;
+  margin: auto;
+  height: 70px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 20px;
+}
+
+/* Logo */
+nav p {
+  font-size: 28px;
+  font-weight: bold;
+  color: #16a34a;
+  cursor: pointer;
+}
+
+/* Search + Icons */
+.search-btn {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Search Input */
+.search-btn input {
+  width: 350px;
+  height: 42px;
+
+  padding: 0 15px;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  outline: none;
+  font-size: 16px;
+
+  transition: 0.3s;
+}
+
+.search-btn input:focus {
+  border-color: #16a34a;
+  box-shadow: 0 0 6px rgba(22, 163, 74, 0.3);
+}
+
+/* Icons */
+.nav-icons {
+  display: flex;
+  gap: 18px;
+}
+
+.nav-icons div {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+  background: #f5f5f5;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav-icons div:hover {
+  background: #16a34a;
+  color: white;
+  transform: scale(1.08);
+}
+
+.nav-icons i {
+  font-size: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    height: auto;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .search-btn {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .search-btn input {
+    width: 100%;
+  }
+
+  .nav-icons {
+    justify-content: center;
+  }
+}
+

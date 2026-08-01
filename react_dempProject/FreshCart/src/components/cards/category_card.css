@@ -1,0 +1,25 @@
+.category-card{
+    margin:10px;
+    width:150px;
+    height:160px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    /* justify-content:space-evenly; */
+    border-radius:10px;
+    border:2px solid rgb(221, 218, 218);
+}
+
+.image{
+    background-image:url('../../assets/vegetable.png');
+    background-size:cover;
+    border: none;
+    margin:7px;
+    width:100px;
+    height:100px;
+}
+
+.category-card p{
+    font-weight:bold;
+    font-size:12px;
+}

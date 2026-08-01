@@ -1,0 +1,21 @@
+*{
+  font-family:"Google Sans";
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+.parent{
+  height:100vh;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  background: #f5f5f5;
+}
