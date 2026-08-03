@@ -7,11 +7,13 @@ import './components/categorys/category.css'
 import './components/banners/discont-banner/discountBanner.css'
 import './components/popular_products/popularProduct.css'
 import './components/review/review_container.css'
+import './components/footer/footer.css'
 import HomeBanner from './components/banners/hero-banner/HomeBanner.js';
 import Category from './components/categorys/Category.jsx';
 import DiscountBanner from './components/banners/discont-banner/DiscountBanner.jsx';
 import Product_discount from './components/popular_products/Product_discount.jsx';
 import Review_container from './components/review/Review_container.jsx';
+import Footer from './components/footer/Footer.jsx';
 
 
 
@@ -25,6 +27,7 @@ function App() {
             <DiscountBanner />
             <Product_discount/>
             <Review_container/>
+            <Footer />
       </div>
   )
 }

@@ -1,64 +1,92 @@
 .container-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
 }
 
 .container {
-  width: 90%;
-  max-width: 1200px;
-  min-height: 200px;
-  border: 1px solid rgb(183, 223, 239);
-  background:rgb(183, 223, 239);
-  border-radius:10px;
-  display:flex;
-  justify-content:space-evenly;
-  align-items:center;
+    width: 90%;
+    max-width: 1200px;
+    min-height: 420px;
+    background: #e8f7ef;
+    border-radius: 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 60px;
 }
 
-.content{
-    width: 400px;
-    height: 290px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-evenly; 
-    align-items:start;
-    padding: 10px;
+/* Left Content */
+
+.content {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 }
 
-.image{
-    width: 600px;
-    height: 300px;
-    border:2px solid black;
+.des-container {
+    background: #ffe65b;
+    padding: 8px 18px;
+    border-radius: 25px;
+    margin-bottom: 20px;
 }
 
-.des-container{
-    background:rgb(216, 216, 31);
-    padding: 10px;
-    border-radius:20px;
+.des-container p {
+    font-size: 14px;
+    font-weight: 700;
+    color: #000;
 }
 
-.des-container p{
-    font-size: 10px;
-    font-weight:800;
+.content h1 {
+    font-size: 58px;
+    font-weight: 700;
+    color: #1f2937;
+    line-height: 1.15;
+    margin-bottom: 20px;
 }
 
-.content h4{
-    font-size: 12px;
-    color:grey
+.content h4 {
+    font-size: 18px;
+    font-weight: 400;
+    color: #6b7280;
+    line-height: 1.7;
+    margin-bottom: 35px;
 }
 
-.content button{
-    width:110px;
-    height:35px;
-    background:black;
-    border:none;
-    border-radius:10px;
-    color:white;
+.content button {
+    width: 150px;
+    height: 48px;
+    background: #111827;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.img{
-    height:300px;
-    width:300px;
+.content button:hover {
+    background: #16a34a;
+}
+
+/* Right Image */
+
+.image-container {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img {
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    object-fit: contain;
 }
