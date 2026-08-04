@@ -31,7 +31,7 @@ body{
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.parent button{
+.add-button{
   height: 50px;
   width:100px;
   border:none;
@@ -39,7 +39,23 @@ body{
   color:white;
   border-radius:20px;
 }
-
+.delete-button {
+    /* width: 35px;
+    height: 35px; */
+    border: none;
+    border-radius: 5px;
+    background: red;
+    color: white;
+    cursor: pointer;
+}
+.update-button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background: green;
+    color: white;
+    cursor: pointer;
+}
 .task-display{
    width:400px;
    height:500px;
