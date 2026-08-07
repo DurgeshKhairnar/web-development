@@ -92,3 +92,9 @@ body{
   color:white;
   font-weight:500;
 } */
+
+.menu-Container{
+  border:1px solid black;
+  margin:5px;
+  display:flex;
+}
