@@ -1,122 +1,34 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import { BrowserRouter, Routes, Route } from "react-router";
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
 
+function App() {
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+            <div className="w-50 h-auto bg-white rounded-xl flex justify-start  flex-col p-2 relative ">
+                  <p className="absolute bg-indigo-600">
+                    <i className="fa-light fa-circle-xmark"></i>
+                  </p>
+                  <img className="object-cover overflow-hidden px-1 h-45 w-45 " src="https://imgs.search.brave.com/wWMzlSZgO--UgPzovfukMrTWjNfuv_yPqvz03ZL2kuU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNDcv/NDM0LzAwNC9zbWFs/bC9mcmVzaGx5LWJh/a2VkLXBpenphLXdp/dGgtYS1wZXJmZWN0/bHktY3V0LXNsaWNl/LXBuZy5wbmc" />
+                  <div className="flex justify-between "> <p className="font-medium ">Onion Pizz</p>
+                  <p className="text-green-800 font-bold">120.00</p>
+                  </div>
+                  <p className="text-[12px] text-gray-400">i am boy and 2nd stan my name is durgesh lkairnar dhoashdadnk</p>
+                  <div className="flex justify-between pt-2 "> <p className="text-green-800 font-bold">5.0</p>
+                  <button className="font-bold w-30 h-7  bg-green-800 text-white rounded-[6px] active:bg-blue-700">Add</button>
+                  </div>
+            </div>
     </>
   )
 }
 
 export default App
+
+
+  // {/* <Navbar/>
+  //    <Routes>
+  //       <Route path="/" element={<Home />}/>
+  //       <Route path="about" element={<About />}/>
+  //       <Route path="contact" element={<Contact />}/>
+  //    </Routes> */}
