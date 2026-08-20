@@ -53,23 +53,25 @@
 
 
 
-const user = {
-    name: "Durgesh",
+// const user = {
+//     name: "Durgesh",
 
-    normalFunction: function () {
-        console.log(this.name);
+//     normalFunction: function () {
+//         console.log(this.name);
 
-        const arrowFunction = () => {
-            console.log(this.name);
+//         const arrowFunction = () => {
+//             console.log(this.name);
 
-            const arrFun = () => {
-                 console.log(this.name);
-            }
-            arrFun()
-        };
+//             const arrFun = () => {
+//                  console.log(this.name);
+//             }
+//             arrFun()
+//         };
 
-        arrowFunction();
-    }
-};
+//         arrowFunction();
+//     }
+// };
 
-user.normalFunction();
+// user.normalFunction();
+
+
