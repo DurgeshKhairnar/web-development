@@ -14,21 +14,39 @@ import DiscountBanner from './components/banners/discont-banner/DiscountBanner.j
 import Product_discount from './components/popular_products/Product_discount.jsx';
 import Review_container from './components/review/Review_container.jsx';
 import Footer from './components/footer/Footer.jsx';
+import { Routes , Route} from 'react-router-dom'
 
+
+
+function Home(){
+  return (
+  
+         <div className="parent">
+
+                     
+                      <HomeBanner />
+                      <Category />
+                      <DiscountBanner />
+                      <Product_discount/> 
+                      <Review_container/>
+                      <Footer />
+          </div>
+
+  )
+}
 
 
 function App() {
-
   return (
-      <div className="parent">
-            <Nav />
-            <HomeBanner />
-            <Category />
-            <DiscountBanner />
-            <Product_discount/>
-            <Review_container/>
-            <Footer />
-      </div>
+    <>   
+                 <Nav />
+                <Routes>
+                
+                      <Route path='/' element={<Home/>}  />
+                      <Route path='/footer' element={<Footer />}  />
+                      <Route path='/products' element={<Product_discount/>}  />
+                </Routes>
+    </>
   )
 }
 

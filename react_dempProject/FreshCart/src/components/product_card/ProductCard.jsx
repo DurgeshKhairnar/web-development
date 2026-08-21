@@ -1,6 +1,7 @@
 import vegetable from "../../assets/vegetable.png";
 function ProductCard(props){
     return (
+        <section id="products">
         <div className="card-container">
             <div className="product-image">
                     <img src={props.image} alt="product-image"></img>
@@ -12,6 +13,7 @@ function ProductCard(props){
                 <button>+ Add</button>
             </div>
         </div>
+        </section>
     );
 }
 
