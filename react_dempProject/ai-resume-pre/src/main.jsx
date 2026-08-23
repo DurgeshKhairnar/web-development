@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import {BrowserRouter , Routes , Route} from 'react-router-dom';
 import ResumeAnalysis from './components/ResumeAnalysis.jsx';
 import QuestionAnswer from './components/QuestionAnswer.jsx';
+import ScoreCard from './components/ScoreCard.jsx';
 import { ResumeContextProvider } from './context/useResume.jsx';
 import './index.css';
 import App from './App.jsx';
@@ -14,6 +15,7 @@ createRoot(document.getElementById('root')).render(
                     <Route path="/" element={<App />} />
                     <Route path="/resumeAnalysis" element={<ResumeAnalysis />} />
                     <Route path="/resumeAnalysi/questionAnswers" element={<QuestionAnswer />} />
+                     <Route path="/resumeAnalysi/questionAnswers/scorecard" element={<ScoreCard />} />
             </Routes>
     </ResumeContextProvider>  
   </BrowserRouter>

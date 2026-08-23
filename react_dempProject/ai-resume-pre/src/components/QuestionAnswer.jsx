@@ -1,8 +1,11 @@
 import { useResume } from '../context/useResume';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 function QuestionAnswer(){
+
+   const navigation = useNavigate();
 
       const questions = [
         "Tell me about yourself.",
@@ -39,7 +42,7 @@ function QuestionAnswer(){
                 console.log(" Final answer :", updateList);
                 sendQuestionAns(updateList);
                 console.log('1st called')
-        }
+        }   
     }
 
     function sendQuestionAns(answer) {
@@ -55,7 +58,8 @@ function QuestionAnswer(){
             })
                 .then((res) => res.json())
                 .then((data) => {
-                console.log("API Response:", data);
+                 console.log("API Response:", data);
+                 navigation('/resumeAnalysi/questionAnswers/scorecard')
                 })
                 .catch((err) => {
                 console.log("Error:", err);
@@ -101,7 +105,10 @@ function QuestionAnswer(){
                                     ></textarea>
                                     </div>
                                      <button className='bg-purple-600 w-40 h-10 rounded-[5px] flext justify-center items-center text-white font-bold cursor-pointer active:bg-purple-400'
-                                     onClick={handleSubmit} 
+                                     onClick={()=> {
+                                        navigation('/resumeAnalysi/questionAnswers/scorecard')
+                                        console.log('is click')
+                                     }} 
                                     >Submit Answer</button>
                                 </div>
                                   <div className='w-full h-105 rounded-[5px] m-1 border-[1px] border-gray-200 flex justify-evenly items-start flex-col p-2'>
