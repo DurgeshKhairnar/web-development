@@ -1,4 +1,4 @@
-import { useResume } from '../context/useResume';
+import { useResume } from '../../context/useResume';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,15 +7,17 @@ function QuestionAnswer(){
 
    const navigation = useNavigate();
 
-      const questions = [
-        "Tell me about yourself.",
-        "What are your strengths and weaknesses?",
-        "Explain one project you have worked on.",
-        "Why should we hire you?",
-        "Where do you see yourself in the next 5 years?"
-        ];
+    //   const questions = [
+    //     "Tell me about yourself.",
+    //     "What are your strengths and weaknesses?",
+    //     "Explain one project you have worked on.",
+    //     "Why should we hire you?",
+    //     "Where do you see yourself in the next 5 years?"
+    //     ];
 
-    const { questionList } = useResume();
+ 
+
+    const { questionList , setInterviewResult } = useResume();
 
     let [questionIndex , setQuestionIndex] = useState(0);
     const [answer , setAnswer] = useState('');
@@ -25,17 +27,17 @@ function QuestionAnswer(){
     function handleSubmit(){
         
           const newAnswer = {
-                question: questions[questionIndex],
+                question: questionList[questionIndex],
                 answer: answer
             };
 
          const updateList = [...answerQuestion,newAnswer]
 
-         setAanswerQuestionList(updateList)
+         setAanswerQuestionList(updateList)         
 
           console.log("Updated answer list:", updateList);
 
-        if(questionIndex < questions.length - 1){
+        if(questionIndex < questionList.length - 1){
             setQuestionIndex(prev => prev + 1)
             setAnswer('')
         }else{
@@ -59,6 +61,7 @@ function QuestionAnswer(){
                 .then((res) => res.json())
                 .then((data) => {
                  console.log("API Response:", data);
+                 setInterviewResult(data.data);
                  navigation('/resumeAnalysi/questionAnswers/scorecard')
                 })
                 .catch((err) => {
@@ -86,11 +89,11 @@ function QuestionAnswer(){
                             <h3 className='text-white'>Ready for your AI Interview? Let's assess your skills!</h3>
                         </div>
                           {/* question answer */}
-                          <div className='w-full h-110 rounded-[5px] m-1 border-[1px] border-gray-200 flex justify-evenly items-center p-1'>
-                                <div className='w-full h-105 rounded-[5px] m-1 border-[1px] border-gray-200 flex justify-between items-start flex-col p-2'>
+                          <div className='w-full  rounded-[5px] m-1 border-[1px] border-gray-200 flex justify-evenly items-center p-1'>
+                                <div className='w-full h-140 rounded-[5px] m-1 border-[1px] border-gray-200 flex justify-between items-start flex-col p-2'>
                                     <div className='w-full'>
                                     <p className='text-purple-800 font-bold'>Practice Question</p>
-                                    <p className='font-bold flex-wrap'>{questions[questionIndex]}</p>
+                                    <p className='font-bold flex-wrap'>{questionList[questionIndex] || 'Question'}</p>
                                     <p className='text-gray-400 text-[10px] font-semibold'>Take your time and provide details answer</p>
                                     <p className='text-purple-800 font-bold text-sm'>Your Answer</p>
                                    <textarea
@@ -105,18 +108,15 @@ function QuestionAnswer(){
                                     ></textarea>
                                     </div>
                                      <button className='bg-purple-600 w-40 h-10 rounded-[5px] flext justify-center items-center text-white font-bold cursor-pointer active:bg-purple-400'
-                                     onClick={()=> {
-                                        navigation('/resumeAnalysi/questionAnswers/scorecard')
-                                        console.log('is click')
-                                     }} 
+                                     onClick={handleSubmit} 
                                     >Submit Answer</button>
                                 </div>
-                                  <div className='w-full h-105 rounded-[5px] m-1 border-[1px] border-gray-200 flex justify-evenly items-start flex-col p-2'>
+                                  <div className='w-full  rounded-[5px] m-1 border-[1px] border-gray-200 flex justify-start items-start flex-col p-2'>
                                      <p className='text-purple-800 font-bold'>Question</p>
-                                     {
-                                        questions.map((que,idx) => (
-                                            <div  className={`w-full h-20 rounded-[5px] border m-1 p-4 flex-wrap cursor-pointer ${
-                                                        que === questions[questionIndex]
+                                     {(questionList && questionList.length > 0) ?
+                                       questionList.map((que,idx) => (
+                                            <div  className={`w-full  rounded-[5px] border m-1 p-4 flex-wrap cursor-pointer ${
+                                                        que === questionList[questionIndex]
                                                         ? "border-purple-500"
                                                         : "border-gray-200"
                                                     }`}
@@ -124,7 +124,7 @@ function QuestionAnswer(){
                                             key={idx}
                                             >{idx+1}.{que}</div>
                                         ))
-                                     }
+                                    :<div>List is Empty</div>}
                                 </div>
                                
                          </div>
@@ -136,10 +136,4 @@ function QuestionAnswer(){
 export default QuestionAnswer;
 
 
-{/* <div className='text-black w-100 h-100 border-2 border-black'>
-                {
-                    questionList?.map((questions , idx) => (
-                        <h1 key={idx}>{idx+1}.{questions}</h1>
-                    ))
-                }
-          </div>  */}
+   

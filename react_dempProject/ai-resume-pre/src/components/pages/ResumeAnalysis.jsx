@@ -1,5 +1,5 @@
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { useResume } from '../context/useResume';
+import { useResume } from '../../context/useResume';
 import { useNavigate }from 'react-router-dom';
 
 function ResumeAnalysis(){

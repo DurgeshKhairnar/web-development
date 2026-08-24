@@ -1,9 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import {BrowserRouter , Routes , Route} from 'react-router-dom';
-import ResumeAnalysis from './components/ResumeAnalysis.jsx';
-import QuestionAnswer from './components/QuestionAnswer.jsx';
-import ScoreCard from './components/ScoreCard.jsx';
+import ResumeAnalysis from './components/pages/ResumeAnalysis.jsx';
+import QuestionAnswer from './components/pages/QuestionAnswer.jsx';
+import ScoreCard from './components/pages/ScoreCard.jsx';
 import { ResumeContextProvider } from './context/useResume.jsx';
 import './index.css';
 import App from './App.jsx';
