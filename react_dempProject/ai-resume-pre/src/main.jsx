@@ -1,22 +1,12 @@
 
 import { createRoot } from 'react-dom/client'
 import {BrowserRouter , Routes , Route} from 'react-router-dom';
-import ResumeAnalysis from './components/pages/ResumeAnalysis.jsx';
-import QuestionAnswer from './components/pages/QuestionAnswer.jsx';
-import ScoreCard from './components/pages/ScoreCard.jsx';
-import { ResumeContextProvider } from './context/useResume.jsx';
+
 import './index.css';
 import App from './App.jsx';
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <ResumeContextProvider>
-            <Routes >
-                    <Route path="/" element={<App />} />
-                    <Route path="/resumeAnalysis" element={<ResumeAnalysis />} />
-                    <Route path="/resumeAnalysi/questionAnswers" element={<QuestionAnswer />} />
-                     <Route path="/resumeAnalysi/questionAnswers/scorecard" element={<ScoreCard />} />
-            </Routes>
-    </ResumeContextProvider>  
+        <App />
   </BrowserRouter>
 )

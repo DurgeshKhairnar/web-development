@@ -1,6 +1,7 @@
-
+import { useNavigate } from 'react-router-dom';
 
 function NavBar(){
+     let navigate = useNavigate();
     return (
         <div   className='h-12 flex border-b-[1px] border-gray-200 w-full p-1 justify-between items-center '>
             <div>
@@ -15,7 +16,9 @@ function NavBar(){
                 <p className='font-semibold text-[12px] cursor-pointer'>About Us</p>
             </div>                  
             <div className='w-65 flex justify-between'>
-                         <button className='w-30 h-8 border-gray-200 border-[1px] rounded-[5px] font-semibold text-[10px] poin cursor-pointer'>Login</button>
+                         <button className='w-30 h-8 border-gray-200 border-[1px] rounded-[5px] font-semibold text-[10px] poin cursor-pointer'
+                         onClick={() =>  navigate('/uploadResume')}
+                         >Login</button>
                     <button className='w-30 h-8 bg-purple-700 rounded-[5px] font-semibold text-[10px] text-white cursor-pointer'>Get Started Free</button>
             </div>
         </div>
