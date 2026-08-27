@@ -1,7 +1,15 @@
 import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+
+import LoginPopup from '../sub-components/LoginPoP.jsx'
+import SingUp from '../sub-components/SingUp.jsx';
 
 function NavBar(){
      let navigate = useNavigate();
+
+        const [showLogin, setShowLogin] = useState(false);
+        const [showSingUp, setSingUp] = useState(false);
+
     return (
         <div   className='h-12 flex border-b-[1px] border-gray-200 w-full p-1 justify-between items-center '>
             <div>
@@ -17,10 +25,22 @@ function NavBar(){
             </div>                  
             <div className='w-65 flex justify-between'>
                          <button className='w-30 h-8 border-gray-200 border-[1px] rounded-[5px] font-semibold text-[10px] poin cursor-pointer'
-                         onClick={() =>  navigate('/uploadResume')}
+                        onClick={() =>  setShowLogin(true)}
                          >Login</button>
-                    <button className='w-30 h-8 bg-purple-700 rounded-[5px] font-semibold text-[10px] text-white cursor-pointer'>Get Started Free</button>
+                    <button className='w-30 h-8 bg-purple-700 rounded-[5px] font-semibold text-[10px] text-white cursor-pointer'
+                     onClick={() =>  setSingUp(true)}
+                    >Get Started Free</button>
             </div>
+             {showLogin && (
+                <LoginPopup
+                    onClose={() => setShowLogin(false)}
+                />
+            )}
+             {showSingUp && (
+                <SingUp
+                    onClose={() => setSingUp(false)}
+                />
+            )}
         </div>
     )
 }

@@ -75,3 +75,13 @@
 // user.normalFunction();
 
 
+function test(){
+    let x = 10;
+    // console.log(x);
+}
+console.log(x)
+
+
+
+test()
+
