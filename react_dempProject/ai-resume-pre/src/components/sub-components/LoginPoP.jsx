@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useResume } from '../../context/useResume.jsx';
 
 function LoginPopup({ onClose }) {
 
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
+
+    const {isLogin, setIsLogin } =  useResume();
 
     async function handleLogin(e){
         e.preventDefault();
@@ -23,7 +26,9 @@ function LoginPopup({ onClose }) {
         })
     })
                      
-    console.log(`respons status code ${response.status}`)
+    if(response.status == 201 || response.status == 200){
+            setIsLogin(true)
+    }
 }
 
     return (

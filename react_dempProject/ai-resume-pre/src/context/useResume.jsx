@@ -1,4 +1,4 @@
-import { createContext , useContext , useState } from 'react';
+import { createContext , useContext , useState , useEffect } from 'react';
 
 
 export const ResumeContext = createContext(null);
@@ -9,9 +9,18 @@ export function ResumeContextProvider({children}){
     const [questionList, setQuestionList] = useState([]);
     const [interviewResult, setInterviewResult] = useState([]);
 
+     const [isLogin,setIsLogin] = useState(() => {
+            const islog = localStorage.getItem('isLogin');
+            return  islog === 'true';
+        });
+
+        useEffect(() => {
+            localStorage.setItem('isLogin',isLogin)
+        },[isLogin])
+
     return (
-            <ResumeContext.Provider value={{resumeData , setResumeData, questionList, setQuestionList,interviewResult,setInterviewResult}}> 
-                {children}
+            <ResumeContext.Provider value={{resumeData , setResumeData, questionList, setQuestionList,interviewResult,setInterviewResult , isLogin, setIsLogin}}> 
+                {children} 
             </ResumeContext.Provider>
     );
 }
