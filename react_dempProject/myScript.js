@@ -75,16 +75,22 @@
 // user.normalFunction();
 
 
-{
-  var x = 10;   
+// {
+//   var x = 10;   
+// }
+
+// console.log(x);
+
+
+const str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+let pass = '';
+
+for(let i = 1; i < 17; i++){
+  const num = Math.floor(Math.random() * str.length);
+  pass += str.charAt(num)
 }
 
-console.log(x);
-
-
-
-
-
+console.log(pass);
 
 
 
