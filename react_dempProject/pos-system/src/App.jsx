@@ -16,10 +16,11 @@ function App() {
       if(!item) return;
       const myItemList = [item,...cartItemsList]
       setItemsList(myItemList)
+      console.log(myItemList.length)
    }
 
    function removeItem(ind){
-     const removeList =  cartItemsList.filter((_,index) => index !== id );
+     const removeList =  cartItemsList.filter((_,index) => index !== ind );
       setItemsList(removeList)
    }
 

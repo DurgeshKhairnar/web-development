@@ -1,16 +1,33 @@
 import Search from '../Search.jsx';
 import { useItems } from '../../context/contextCartItems.js';
+import { useState } from 'react'; 
 
 function Dashboard(){
 
     const { cartItemsList , addItems , removeItem } = useItems();
 
-    const categorys = [
-      'All',
-      'Breakfast',
-      'Soup',
-      'MainCours'
-    ];
+     const [ categoryNumber , setCategoryNumber] = useState(0)
+
+    const [itemNumber , setItemNumber] = useState(0);
+
+    const category = [
+      {
+        categoryName:'All',
+        isAdd:false
+      },
+      {
+        categoryName:'Breakfast',
+        isAdd:false
+      },
+      {
+        categoryName:'MainCours',
+        isAdd:false
+      },
+      {
+        categoryName:'Soup',
+        isAdd:false
+      }
+    ]
 
     const items = [
   {
@@ -39,13 +56,20 @@ function Dashboard(){
     price: 159.00
   }
 ];
+
+  // function handleFilterCatgory(id){
+  //   categorys.fo
+  // }
+
     return(
-        <div className='flex flex-col min-h-screen w-full bg-gray-50 p-2'>
+        <div className='flex flex-col min-h-screen w-full bg-gray-100 p-2'>
             <Search/>
             <div className='p-2 mt-2 mb-2 w-full flex justify-evenly'>
                 {
-                    categorys.map((cate,idx) =>(
-                        <div key={idx} className='p-2 rounded-2xl w-40 flex items-center justify-center bg-white shadow-[0_0px_7px_rgba(0,0,0,0.15)]'>{cate}</div>
+                    category.map((cate,idx) =>(
+                        <button 
+                        onClick={() => handleFilterCatgory(idx)}
+                        key={idx} className={`p-2 rounded-2xl w-40 flex items-center justify-center bg-white shadow-[0_0px_7px_rgba(0,0,0,0.15)] hover:bg-green-200`}>{cate.categoryName}</button>
                     ))
                 }
             </div>
@@ -56,10 +80,11 @@ function Dashboard(){
                             <img src={itm.image} className='object-contain rounded-2xl h-25 mx-auto'/>
                             <p className='font-bold flex-wrap text-[15px]'>{itm.title}</p>
                             <p className='font-semibold flex-wrap text-green-400 text-[13px]'>{itm.price}</p>
-                            <button className='border-none bg-green-100 w-full p-2 rounded-2xl font-semibold  cursor-pointer active:bg-green-600 active:text-white'
+                            <button className={`border-none   w-full p-2 rounded-2xl font-semibold bg-green-200 cursor-pointer active:bg-green-600 active:text-white`}
                             onClick={() => {
-                                addItems({id:Date.now(),image:itm.image,price:itm.price})
-                              
+                                addItems({id:Date.now(),title:itm.title,image:itm.image,price:itm.price})
+                                // setItemNumber(idx);
+                  
                             }}
                             >ADD to Dish</button>
                         </div>
