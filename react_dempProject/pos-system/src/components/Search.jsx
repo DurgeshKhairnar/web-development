@@ -8,7 +8,7 @@ function Search(){
                 <input
                     type="text"
                     placeholder="Search Product.."
-                    className="h-10 w-full rounded-2xl border-2 border-gray-200 bg-white pl-10 focus:border-green-500 focus:outline-none"
+                    className="h-10 w-full rounded-[5px] border-2 border-gray-200 bg-white pl-10 focus:border-green-500 focus:outline-none"
                 />
             </div>
     );

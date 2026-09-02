@@ -5,10 +5,13 @@ export const cartItems = createContext({
         id:1,
         image:'',
         title:'Mix_Pizza',
-        price:120.00
+        category:'Burger',
+        price:120.00,
+        count:0,
     }],
     addItems:function(item){},
-    removeItem:function(ind){}
+    removeItem:function(ind){},
+    addQuantity:function(idx){}
 });
 
 export const CartItemsProvider = cartItems.Provider;

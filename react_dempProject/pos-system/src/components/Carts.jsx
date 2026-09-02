@@ -1,58 +1,61 @@
 import { useItems } from '../context/contextCartItems.js';
+import { useState } from 'react';
+import  OrderPop from '../components/DashBoard_Components/OrderPop.jsx';
+import empty_orders from '../assets/empty_orders.png';
 
 function Carts(){
-    
-    const { cartItemsList , removeItem } = useItems();
 
-    console.log(` in cart ${cartItemsList.length}`)
+    const { cartItemsList} = useItems();
 
-        const items = [
-  {
-    image: "https://i.pinimg.com/1200x/0d/6a/53/0d6a5368d68572456e17f166a6eee7c7.jpg",
-    title: "Pizza",
-    price: 299.00
-  },
-  {
-    image: "https://i.pinimg.com/1200x/aa/f3/aa/aaf3aa4e15769c860aff8b2a22edfc78.jpg",
-    title: "Burger",
-    price: 199.00
-  },
-  {
-    image: "https://i.pinimg.com/1200x/fc/c2/55/fcc2555f7387cd9f32568f32581baabc.jpg",
-    title: "Pasta",
-    price: 249.00
-  },
-  {
-    image: "https://i.pinimg.com/1200x/a3/b2/53/a3b253b0f12519ef8ac1a6be6b6a8bb8.jpg",
-    title: "French Fries",
-    price: 129.00
-  },
-  {
-    image: "https://i.pinimg.com/1200x/28/2c/e1/282ce184b10314c72aab511146f3a7f9.jpg",
-    title: "Sandwich",
-    price: 159.00
-  },
-];
+    const [isOrderPop , setOrderpPop] = useState(false);
+
+    function emptyListIcon(){
+        return (
+            <div className='flex p-1 flex-col items-center justify-center bg-gray-100 rounded-full h-70'>
+                    <img src={empty_orders} alt='img' className='object-contain h-30 w-30'/>
+                    <p className='font-bold text-gray-500 mt-1'>Empty Order List</p>
+            </div>
+        )
+    }
     
     return (
-         <div className='min-h-screen w-120 p-2 flex flex-col items-center bg-white relative'>
-            <p className='font-semibold text-[20px]'>Invoice</p>
-            <div className='w-full p-2 h-100'>
-                {
-                    items.map((itm,idx) => (
-                        <div key={itm.id}
-                        className='w-full h-20 bg-gray-100 rounded-[5px] flex p-1 '
-                        >
-                        <img src={itm.image} alt='img' className='rounded-[5px] object-contain' />
-                        <div className='m-1 flex flex-col justify-evenly w-full bg-white p-1 rounded-[5px]'>
-                            <p className='font-bold flex-wrap text-[14px]'>{itm.title}</p>
-                            <p className='font-bold text-green-400 text-[13px]'>{itm.price}</p>
-                        </div>   
-                        </div> 
-                    ))
-                }
+         <div className={`min-h-screen w-120 p-2 flex flex-col ${(cartItemsList.length > 0) ? 'items-start' :'items-center'} justify-between bg-white`}>
+           <div className='w-full'>
+                <p className='font-semibold text-[20px]'>Invoice</p>
+                
+                <div className='w-full p-2 h-100'>
+                    {
+                       (cartItemsList.length > 0) ? (cartItemsList.map((itm,idx) => (
+                            <div key={idx}
+                            className='w-full h-20 bg-gray-100 rounded-[5px] flex p-1 m-1 '
+                            >
+                            <img src={itm.image} alt='img' className='rounded-[5px] object-contain' />
+                            <div className='m-1 flex flex-col justify-evenly w-full bg-white p-1 rounded-[5px]'>
+                                <p className='font-bold flex-wrap text-[14px]'>{itm.title}</p>
+                                <div className='flex justify-between'>
+                                    <p className='font-bold text-green-400 text-[13px]'>{itm.price}</p>
+                                    <p className='font-bold text-black text-[13px]'>X</p>
+                                    <p className='font-bold text-black text-[13px]'>{itm.count}</p>
+                                    <p className='font-bold text-black text-[13px]'>{itm.price * itm.count}</p>
+                                </div>
+                            </div>   
+                            </div> 
+                        ))) : (emptyListIcon())
+                    }
+                </div>
+           </div>
+          <div className='flex w-full h-25 flex-col justify-between'>
+            <div className='w-full h-13 flex justify-between p-1 items-center'>
+                   <div className='p-1 bg-gray-200 w-23 flex items-center justify-center rounded-xl font-semibold'>Cash</div>
+                   <p className='p-1 bg-gray-200 w-23 flex items-center justify-center rounded-xl font-semibold'>Card</p>
+                   <p className='p-1 bg-gray-200 w-23 flex items-center justify-center rounded-xl font-semibold'>QR Code</p>
             </div>
-          <button className=' mx-2 absolute h-10 w-full bg-green-500 text-white font-bold rounded-[7px] bottom-24'>Total</button>
+            <button 
+            onClick={()=> setOrderpPop(prev => !prev)}
+            className=' mx-2  h-10 w-full bg-green-500 text-white font-bold rounded-[7px] 
+            '>Total : {cartItemsList.reduce((total,item) => ( total += item.count * item.price),0)}</button>
+          </div>
+          {(isOrderPop) ? <OrderPop onClose={() => setOrderpPop(prev => !prev)} orderList={cartItemsList}/> : <></> } 
         </div>
     );
 }
