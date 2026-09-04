@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState , useEffect} from 'react'
 import { Routes , Route } from 'react-router-dom';
 import './App.css'
 import SideBar from './components/SideBar.jsx';
@@ -10,6 +10,17 @@ import { CartItemsProvider } from './context/contextCartItems.js';
 
 
 function App() {
+   
+   const [products, addProducts ] = useState(() => {
+      const allProducts = localStorage.getItem('myProducts')
+      return (allProducts) ? JSON.parse(allProducts) : [];
+   });
+
+   useEffect(() => {
+      localStorage.setItem('myProducts',JSON.stringify(products))
+   },[products])
+
+
    const [cartItemsList , setItemsList] = useState([]);
 
    const [orderList , setOrderList] = useState([]);
@@ -79,7 +90,7 @@ function App() {
     <>
           <div className='w-full min-h-screen flex'>
             <CartItemsProvider value={{cartItemsList,addItems,removeItem,addQuantity,removeQuantity,setItemsList,
-              orderList , setOrderList
+              orderList , setOrderList, products, addProducts
             }}>
              <SideBar/>
              <Routes>

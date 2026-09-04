@@ -1,58 +1,24 @@
 import Search from '../Search.jsx';
 import { useItems } from '../../context/contextCartItems.js';
-import { useState } from 'react'; 
+import { useState , useEffect } from 'react'; 
+import AddProductPop from '../DashBoard_Components/AddProductPop.jsx';
 
 function Dashboard(){
 
-  const allItems = [
-  {
-    id:1,
-    image: "https://i.pinimg.com/1200x/0d/6a/53/0d6a5368d68572456e17f166a6eee7c7.jpg",
-    title: "Pizza",
-    category:'Burger',
-    price: 299.00,
-    count:0,
-  },
-  {
-    id:2,
-    image: "https://i.pinimg.com/1200x/aa/f3/aa/aaf3aa4e15769c860aff8b2a22edfc78.jpg",
-    title: "Burger",
-    category:'Soup',
-    price: 199.00,
-    count:0,
-  },
-  {
-    id:3,
-    image: "https://i.pinimg.com/1200x/fc/c2/55/fcc2555f7387cd9f32568f32581baabc.jpg",
-    title: "Pasta",
-    category:'Breakfast',
-    price: 249.00,
-    count:0,
-  },
-  {
-    id:4,
-    image: "https://i.pinimg.com/1200x/a3/b2/53/a3b253b0f12519ef8ac1a6be6b6a8bb8.jpg",
-    title: "French Fries",
-    category:'Breakfast',
-    price: 129.00,
-    count:0, 
-  },
-  {
-    id:5,
-    image: "https://i.pinimg.com/1200x/28/2c/e1/282ce184b10314c72aab511146f3a7f9.jpg",
-    title: "Sandwich",
-    category:'Soup',
-    price: 159.00,
-    count:0, 
-  }
-  ];
+   const { cartItemsList , addItems , addQuantity , removeQuantity , products } = useItems();
 
-    const { cartItemsList , addItems , addQuantity , removeQuantity } = useItems();
+  const [displayItems, setDisplayItems] = useState([]);
 
+  useEffect(() => {
+      return setDisplayItems(products)
+  },[products])
+
+   
     const [ categoryNumber , setCategoryNumber] = useState(0)
+
+    const [addPop , setPop] = useState(false);
  
-    const [items] = useState(allItems);
-    const [displayItems, setDisplayItems] = useState(allItems);
+    
  
     const category = [
       {
@@ -82,11 +48,11 @@ function handleFilterCatgory(idx) {
   setCategoryNumber(idx);
 
   if (selectedCategory === "All") {
-    setDisplayItems(items);
+    setDisplayItems(products);
     return;
   }
 
-  const filteredItems = items.filter(
+  const filteredItems = products.filter(
     (itm) => itm.category === selectedCategory
   );
 
@@ -105,7 +71,7 @@ function decrement(idx){
 }
 
     return(
-        <div className='flex flex-col min-h-screen w-full bg-gray-100 p-2'>
+        <div className='flex flex-col min-h-screen w-full bg-gray-100 p-2 relative'>
             <Search/>
             <div className='p-2 mt-2 mb-2 w-full flex flex-wrap justify-evenly'>
                 {
@@ -146,6 +112,12 @@ function decrement(idx){
                        })
                     }
             </div>
+            <button 
+              onClick={() => (setPop(prev => !prev))}
+            className='absolute w-12 h-12 flex justify-center items-center bg-white rounded-full border-2 border-gray-200 text-2xl shadow-2xl right-10 bottom-10 cursor-pointer hover:border-green-500 '>
+                    +
+            </button>
+            {(addPop) ? <AddProductPop onClose={() =>   setPop(prev => !prev)} /> : <></>} 
         </div>
     );
 }
