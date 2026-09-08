@@ -9,7 +9,7 @@ function Orders(){
         <div className='flex flex-col justify-start items-start min-h-screen bg-gray-100 w-full p-2'>
             <Search />
             <h1 className='my-1 font-bold'>Orders</h1>
-            <div className='flex'>
+            <div className='flex flex-wrap'>
                  {
                 orderList.map((items,index) => (
                     <div key={index} className='w-70  bg-white p-3 flex 

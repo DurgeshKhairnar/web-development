@@ -5,7 +5,7 @@ import AddProductPop from '../DashBoard_Components/AddProductPop.jsx';
 
 function Dashboard(){
 
-   const { cartItemsList , addItems , addQuantity , removeQuantity , products } = useItems();
+   const { cartItemsList , addItems , addQuantity , removeQuantity , products , addProducts } = useItems();
 
   const [displayItems, setDisplayItems] = useState([]);
 
@@ -70,27 +70,36 @@ function decrement(idx){
   removeQuantity(idx)
 }
 
+function handleRemove(idx){
+       const removePoduct = products.filter((items) => items.id !== idx)
+       addProducts(removePoduct)
+       console.log('is Tab')
+}
+
+
     return(
         <div className='flex flex-col min-h-screen w-full bg-gray-100 p-2 relative'>
             <Search/>
-            <div className='p-2 mt-2 mb-2 w-full flex flex-wrap justify-evenly'>
+            <div className='p-1 mt-1 mb-2 w-full flex flex-wrap items-center justify-start'>
                 {
                     category.map((cate,idx) =>(
                         <button
                         key={idx}  
                         onClick={() =>handleFilterCatgory(idx)}
-                        className={`p-2 rounded-2xl w-40 flex items-center justify-center  shadow-[0_0px_7px_rgba(0,0,0,0.15)] hover:bg-green-200 ${categoryNumber === idx ? 'bg-green-400 text-white':'bg-white'}`}>{cate.categoryName}</button>
+                        className={`p-2 rounded-2xl w-25 flex items-center m-1 justify-center  shadow-[0_0px_7px_rgba(0,0,0,0.15)] hover:bg-green-200 ${categoryNumber === idx ? 'bg-green-400 text-white':'bg-white'}`}>{cate.categoryName}</button>
                     ))
                 }
+                <div className='w-10 h-10 p-0.5 flex items-center justify-center  bg-white rounded-full shadow-[0_0px_7px_rgba(0,0,0,0.15)] hover:bg-green-200 text-xl cursor-pointer'>+</div>
             </div>
-            <div className='w-full flex flex-wrap '>
+            <div className='w-full flex flex-wrap  '>
                     {
                         displayItems.map((itm,idx) =>{
                           const isCart = cartItemsList.find(item => item.id === itm.id);
                           return (
                               <div key={idx} className='m-1 w-40 h-55  rounded-[8px] flex-col flex items-start justify-evenly p-2 border-2
-                              border-gray-300 bg-white shadow-[0_0px_7px_rgba(0,0,0,0.15)] hover:border-green-500  hover:border-2'>
-                                  <img src={itm.image} className='object-contain rounded-2xl h-25 mx-auto'/>
+                              border-gray-300 bg-white shadow-[0_0px_7px_rgba(0,0,0,0.15)] hover:border-green-500  hover:border-2 relative'>
+                                <button onClick={() => handleRemove(itm.id)}><i className="ri-delete-bin-6-line top-1 right-1.5  absolute"></i></button>
+                                  <img src={itm.image} className='object-contain rounded-2xl h-25 mx-auto '/>
                                   <p className='font-bold flex-wrap text-[15px]'>{itm.title}</p>
                                   <p className='font-semibold flex-wrap text-green-400 text-[13px]'>{itm.price}</p>
                                 { isCart ? (<div className={`w-full p-1 rounded-2xl font-semibold bg-green-200 cursor-pointe flex justify-between items-center`}>

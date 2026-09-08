@@ -7,6 +7,7 @@ import Tables from './components/pages/Tables.jsx';
 import Orders from './components/pages/Orders.jsx';
 import Carts from './components/Carts.jsx';
 import { CartItemsProvider } from './context/contextCartItems.js';
+import Login from './components/pages/login.jsx';
 
 
 function App() {

@@ -1,7 +1,9 @@
 import { useItems } from '../../context/contextCartItems.js';
 
-function OrderPop(props){
 
+
+function OrderPop(props){
+    const orderId = Date.now();
     function totalAmountFun(){
         return props.orderList?.reduce((total,itm) => (total += itm.price * itm.count),0)
     }
@@ -12,7 +14,7 @@ function OrderPop(props){
     console.log(orderList)
 
     function addOrderList(){
-         const orderId = Date.now();
+        
          const newList = {orderId:orderId,itemList:props.orderList,totalAmount:totalCount}
         setOrderList(prev => [...prev,newList])
         setItemsList([])
@@ -27,7 +29,7 @@ function OrderPop(props){
                             <button className='cursor-pointer' onClick={props.onClose}>X</button>
                         </div>
                         <div className='flex justify-between'>
-                            <p className='font-semibold'>OrderId : <span className='font-bold'>{Date.now()}</span></p>
+                            <p className='font-semibold'>OrderId : <span className='font-bold'>{orderId}</span></p>
                             <p className='font-semibold mb-2'>T14</p>
                         </div>
 

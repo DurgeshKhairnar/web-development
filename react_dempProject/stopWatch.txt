@@ -1,0 +1,41 @@
+   const [time , setTime] = useState(0);
+        const [isRunning , setRunning] = useState(false);
+        
+        useEffect(() => {
+        
+            if(!isRunning) return;
+
+           const interval = setInterval(() =>{
+                setTime(prev => prev + 1);
+            },1000)
+
+            return () => clearInterval(interval);
+        },[isRunning])
+
+        let hours = Math.floor(time / 3600)
+        let minutes = Math.floor((time % 3600) / 60);
+        let second = time % 60
+ 
+ <div className='border-2 h-100 w-150 bg-black flex flex-col justify-center items-center'>
+                        <h1 className='text-white font-bold text-4xl m-1'>{String(hours).padStart(2,'0')}:{String(minutes).padStart(2,'0')}:{String(second).padStart(2,'0')}</h1>
+                        <div className='w-100 flex items-center justify-between'>
+                            <button 
+                                onClick={() => {
+                                    setRunning(prev => !prev);
+                                }}
+                                className='text-white border border-white p-1 w-30'>Start
+                            </button>
+                             <button 
+                                onClick={() => {
+                                    setTime(0);
+                                }}
+                                className='text-white border border-white p-1 w-30'>Reste
+                            </button>
+                            <button 
+                                onClick={() => {
+                                    setRunning(prev => !prev);
+                                }}
+                                className='text-white border border-white p-1 w-30'>Stop
+                            </button>
+                        </div>
+                 </div>
