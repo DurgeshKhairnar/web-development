@@ -1,10 +1,61 @@
+import toast , { Toaster } from 'react-hot-toast';
 import restro_bg_image from '../../assets/restro_bg_image.jpg';
 import hot_food from '../../assets/hot_food.png';
+import { useState } from 'react';
+import Signup from './Signup.jsx';
 
 
 function Login(){
+
+    const [userName , setUserName] = useState('');
+    const [password , setPassword] = useState('');
+
+    const [isLogin , setLogin] = useState(false);
+
+    const [isLoading , setLoading] = useState('Login')
+
+    function handleSubmit(e){
+        e.preventDefault();
+        console.log(userName);
+        console.log(password)
+        login();
+    }
+
+    async function login(){
+        setLoading('Loading...')
+      try{
+          const response = await fetch('http://localhost:3000/api/loginUser',
+            {
+                method:'POST',
+                credentials: "include",
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({userName:userName , password:password})
+            }
+        );
+         const jsonRespons = await response.json();
+         if(response.ok){
+            console.log('login');
+            toast.success('Login Successfully')
+            setUserName('');
+            setPassword('');
+         }else{
+             toast.error(`Error ${jsonRespons.message}`)
+         }
+
+      }catch (e){
+            console.log(`Error ${e.message}`)
+            toast.error(`Error ${e.message}`)
+      } finally {
+        setLoading('Login')
+      }
+    }
+
     return (
-        <div className='flex h-screen'>
+     <>
+        <Toaster />
+           <div className='flex h-screen'>
             <div className='w-[50%] h-screen relative'>
                 <img className='w-full h-full object-cover lean' src={restro_bg_image} alt='restro_bg_image' />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
@@ -22,33 +73,49 @@ function Login(){
                     <p className='absolute top-120 left-10  w-35 text-white flex justify-between items-center text-xs'><i className="ri-bar-chart-line text-amber-500 text-[20px] font-bold"></i>Grow Your Business</p>
             </div>
             <div className='w-[50%] h-screen flex flex-col items-start justify-evenly px-10'>
-                    <div>
+                    {
+                        (isLogin) ? (<div>
                         <h1 className='text-4xl font-bold'>Login to Restro</h1>
                         <h5 className='text-gray-500 font-semibold'>
                             Enter your credentials to access your account
                         </h5>
-                    </div>
+                    </div>) : (<div>
+                        <h1 className='text-4xl font-bold'>Sign up</h1>
+                    </div>)
+                    }
+                   {
+                      (isLogin) ? (
+                         <form onSubmit={handleSubmit} className='p-1 h-60 flex flex-col justify-evenly'>
                     <div>
-                        <p className='font-semibold'>Email Address</p>
-                        <div className='flex items-center focus-within:border-amber-500 border-2 border-gray-200 p-1 w-120 h-10'>
-                            <i className="ri-mail-line"></i>
-                            <input className='w-full h-full p-2 outline-none ' type='email' placeholder='Enter Your Email' />
-                        </div>
-                    </div>
+                            <p className='font-semibold'>Email Address</p>
+                            <div className='flex items-center focus-within:border-amber-500 border-2 border-gray-200  p-1 w-120 h-10'>
+                                <i className="ri-mail-line"></i>
+                                <input 
+                                value={userName}
+                                onChange={(e) => setUserName(e.target.value)}
+                                className='w-full h-full p-2 outline-none ' type='text' placeholder='Enter Your Email' />
+                            </div>
+                     </div>
                      <div>
-                        <p className='font-semibold'>Password</p>
-                         <div className='flex items-center border-2 focus-within:border-amber-500 border-gray-200 p-1 w-120 h-10'>
-                            <i className="ri-lock-line"></i>
-                            <input className='w-full h-full p-2 outline-none ' type='password' placeholder='Enter Your Password' />
+                                <p className='font-semibold'>Password</p>
+                                <div className='flex items-center border-2 focus-within:border-amber-500 border-gray-200 p-1 w-120 h-10'>
+                                    <i className="ri-lock-line"></i>
+                                    <input 
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className='w-full h-full p-2 outline-none ' type='text' placeholder='Enter Your Password' />
+                                </div>
+                     </div>
+                        <div className='flex items-center justify-between w-120'>
+                            <h1></h1>
+                            <p className='text-amber-500'>Forget password?</p>
                         </div>
-                    </div>
-                 <div className='flex items-center justify-between w-120'>
-                    <h1></h1>
-                    <p className='text-amber-500'>Forget password?</p>
-                 </div>
-                 <div className='w-120 h-13 bg-amber-500 rounded-[5px] flex justify-center items-center'>
-                    <p className='text-white font-semibold'>Login</p>
-                 </div>
+                        <button type='submit' className='w-120 h-13 bg-amber-500 rounded-[5px] flex justify-center items-center cursor-pointer'>
+                            <p className='text-white font-semibold'>{isLoading}</p>
+                        </button>
+                    </form>
+                      ) : (<Signup/>)
+                   }
                  <div className='flex items-center justify-center w-120'> 
                     <p className='text-gray-500 text-sm'>or continue with</p>
                  </div>
@@ -57,8 +124,22 @@ function Login(){
                                 <p className='font-semibold'>Continue with Gmail</p>
                          </div>
                  </div>
+                  {
+                    (isLogin) ? (<div className='flex items-center justify-center w-120'> 
+                    <p className='text-gray-500 text-sm'>Don't have an account? <span 
+                    onClick={() =>setLogin((p) => !p)}
+                    className='text-amber-500 cursor-pointer'>Sign up</span></p>
+                 </div>): (
+                    <div className='flex items-center justify-center w-120'> 
+                    <p className='text-gray-500 text-sm'>Already you have an account? <span 
+                    onClick={() =>setLogin((p) => !p)}
+                    className='text-amber-500 cursor-pointer'>Login</span></p>
+                 </div>
+                 )
+                  }
             </div>
         </div>
+     </>
     )
 }
 

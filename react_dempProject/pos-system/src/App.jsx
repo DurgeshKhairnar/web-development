@@ -1,10 +1,11 @@
 import { useState , useEffect} from 'react'
 import { Routes , Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import './App.css'
 import SideBar from './components/SideBar.jsx';
 import Dashboard from './components/pages/Dashboard.jsx';
 import Tables from './components/pages/Tables.jsx';
-import Orders from './components/pages/Orders.jsx';
+import Orders from '../src/components/pages/Orders.jsx';
 import Carts from './components/Carts.jsx';
 import { CartItemsProvider } from './context/contextCartItems.js';
 
@@ -21,6 +22,8 @@ function App() {
       localStorage.setItem('myProducts',JSON.stringify(products))
    },[products])
 
+
+   const [category , setCategory] = useState([]);
 
    const [cartItemsList , setItemsList] = useState([]);
 
@@ -89,9 +92,10 @@ function App() {
 
   return (
     <>
-          <div className='w-full min-h-screen flex'>
+            <div className='w-full min-h-screen flex'>
             <CartItemsProvider value={{cartItemsList,addItems,removeItem,addQuantity,removeQuantity,setItemsList,
-              orderList , setOrderList, products, addProducts
+              orderList , setOrderList, products, addProducts,
+              category , setCategory
             }}>
              <SideBar/>
              <Routes>

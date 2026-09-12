@@ -2,6 +2,7 @@ import Search from '../Search.jsx';
 import { useItems } from '../../context/contextCartItems.js';
 import { useState , useEffect } from 'react'; 
 import AddProductPop from '../DashBoard_Components/AddProductPop.jsx';
+import Category from '../Category.jsx';
 
 function Dashboard(){
 
@@ -13,51 +14,28 @@ function Dashboard(){
       return setDisplayItems(products)
   },[products])
 
-   
-    const [ categoryNumber , setCategoryNumber] = useState(0)
 
     const [addPop , setPop] = useState(false);
  
     
- 
-    const category = [
-      {
-        categoryName:'All',
-        isAdd:false
-      },
-      {
-        categoryName:'Breakfast',
-        isAdd:false
-      },
-      {
-        categoryName:'MainCours',
-        isAdd:false
-      },
-      {
-        categoryName:'Soup',
-        isAdd:false
-      }
-    ]
 
+// function handleFilterCatgory(idx) {
 
+//   const selectedCategory = category[idx].categoryName;
 
-function handleFilterCatgory(idx) {
+//   setCategoryNumber(idx);
 
-  const selectedCategory = category[idx].categoryName;
+//   if (selectedCategory === "All") {
+//     setDisplayItems(products);
+//     return;
+//   }
 
-  setCategoryNumber(idx);
+//   const filteredItems = products.filter(
+//     (itm) => itm.category === selectedCategory
+//   );
 
-  if (selectedCategory === "All") {
-    setDisplayItems(products);
-    return;
-  }
-
-  const filteredItems = products.filter(
-    (itm) => itm.category === selectedCategory
-  );
-
-  setDisplayItems(filteredItems);
-}
+//   setDisplayItems(filteredItems);
+// }
 
 function increment(idx){
     console.log(idx)
@@ -80,17 +58,7 @@ function handleRemove(idx){
     return(
         <div className='flex flex-col min-h-screen w-full bg-gray-100 p-2 relative'>
             <Search/>
-            <div className='p-1 mt-1 mb-2 w-full flex flex-wrap items-center justify-start'>
-                {
-                    category.map((cate,idx) =>(
-                        <button
-                        key={idx}  
-                        onClick={() =>handleFilterCatgory(idx)}
-                        className={`p-2 rounded-2xl w-25 flex items-center m-1 justify-center  shadow-[0_0px_7px_rgba(0,0,0,0.15)] hover:bg-green-200 ${categoryNumber === idx ? 'bg-green-400 text-white':'bg-white'}`}>{cate.categoryName}</button>
-                    ))
-                }
-                <div className='w-10 h-10 p-0.5 flex items-center justify-center  bg-white rounded-full shadow-[0_0px_7px_rgba(0,0,0,0.15)] hover:bg-green-200 text-xl cursor-pointer'>+</div>
-            </div>
+            <Category />
             <div className='w-full flex flex-wrap  '>
                     {
                         displayItems.map((itm,idx) =>{

@@ -6,6 +6,6 @@ import Login from './components/pages/login.jsx';
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <Login />
+    <App />
   </BrowserRouter>  
 )

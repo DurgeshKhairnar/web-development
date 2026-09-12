@@ -1,5 +1,8 @@
 
 
+
+
+
 // let main = document.createElement('main')
 // let div = document.createElement('div');
 // div.classList.add('outerDiv');
@@ -10,12 +13,12 @@
 // document.body.appendChild(main);
 
 
-let input = document.querySelector('input');
-let submit = document.querySelector('button');
-let h3 = document.querySelector('h3')
+// let input = document.querySelector('input');
+// let submit = document.querySelector('button');
+// let h3 = document.querySelector('h3')
 
-submit.addEventListener('click',() => {
-    h3.textContent = input.value;
-    input.value = '';
-})
+// submit.addEventListener('click',() => {
+//     h3.textContent = input.value;
+//     input.value = '';
+// })
 
