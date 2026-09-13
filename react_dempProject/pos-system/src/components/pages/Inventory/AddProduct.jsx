@@ -1,64 +1,53 @@
-import { useItems } from '../../context/contextCartItems.js';
-import { useState } from 'react'; 
-import { addItems } from '../../redux/slicer/itemsSlicer.js';
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 
-function AddProductPop({onClose}){
 
-    const dispatch = useDispatch();
+function AddProduct(){
 
-    const { products, addProducts} = useItems();
-
-    const [ productValues , addValues ] = useState({
-        image:'',
-        title:'',
-        category:'',
-        price:'',
-    })
-
-    function handleValues(e){
-        const { name , value } = e.target;
-        addValues(prev => ({...prev,[name]:value}));
-    }   
-
-    function handleSubmit(e){
-        e.preventDefault();
-
-        if(!productValues.image || !productValues.title
-            || !productValues.category || !productValues.price
-        ){
-            alert('Plz all values')
-            return;
-        }
-
-        dispatch(addItems({
-            image: productValues.image,
-            title:productValues.title,
-            category:productValues.category,
-            price:productValues.price
-        }))
-
-        addValues({
-            image: '',
-            category: '',
-            title: '',
-            price: ''
+     const [ productValues , addValues ] = useState({
+            image:'',
+            title:'',
+            category:'',
+            price:'',
         })
-    }
+
+       function handleValues(e){
+             const { name , value } = e.target;
+             addValues(prev => ({...prev,[name]:value}));
+         }   
+     
+         function handleSubmit(e){
+             e.preventDefault();
+     
+             if(!productValues.image || !productValues.title
+                 || !productValues.category || !productValues.price
+             ){
+                 alert('Plz all values')
+                 return;
+             }
+     
+             dispatch(addItems({
+                 image: productValues.image,
+                 title:productValues.title,
+                 category:productValues.category,
+                 price:productValues.price
+             }))
+     
+             addValues({
+                 image: '',
+                 category: '',
+                 title: '',
+                 price: ''
+             })
+         }   
 
     return (
-        <div className='fixed inset-0 bg-black/50 flex items-center justify-center'>
-         <div className='bg-white w-100 p-3 rounded-[5px] flex flex-col justify-evenly'> 
-             <div className='flex justify-between'>
-                        <h1 className='font-bold'>Add Product</h1>
-                        <button onClick={onClose}
-                        className='p-1 active:bg-gray-300 rounded-full w-10'
-                        >X</button>
-            </div>
-                <form 
-                onSubmit={handleSubmit}
-                className=''>
-                    <div className='m-1'>
+        <div className='flex justify-evenly'>
+                    <form onSubmit={handleSubmit} className=' flex flex-col justify-evenly w-90  p-1 border border-gray-300 rounded-[5px] bg-white'>
+                      <div>
+                              <h1 className='font-bold ml-1'>Add New Product</h1>
+                              <p className='text-[10px] font-semibold text-gray-400'>Add new product to your Inventory</p>
+                      </div>
+                       <div className='m-1'>
                          <p className='text-[14px] font-semibold'>Product Image</p>
                          <input 
                          name="image"
@@ -66,8 +55,7 @@ function AddProductPop({onClose}){
                          onChange={handleValues}
                          className='border-2 border-gray-400 rounded-[3px] p-1 focus:border-orange-500 focus:outline-none w-full' placeholder='Paste Your Image Address' />
                     </div>
-
-                     <div className='m-1'>
+                    <div className='m-1'>
                          <p className='text-[14px] font-semibold'>Product Category</p>
                          {/* <input className='border-2 border-gray-400 rounded-[3px] p-1 focus:border-orange-500 focus:outline-none w-full' placeholder='Enter Your Product Name' /> */}
                           
@@ -81,7 +69,6 @@ function AddProductPop({onClose}){
                             <option value='MainCours'>MainCours</option>
                          </select>
                     </div>
-                   
                      <div className='m-1'>
                          <p className='text-[14px] font-semibold'>Product Name</p>
                          <input 
@@ -90,7 +77,6 @@ function AddProductPop({onClose}){
                          onChange={handleValues}
                          className='border-2 border-gray-400 rounded-[3px] p-1 focus:border-orange-500 focus:outline-none w-full' placeholder='Enter Your Product Name' />
                     </div>
-
                      <div className='m-1'>
                          <p className='text-[14px] font-semibold'>Product Price</p>
                          <input 
@@ -99,15 +85,18 @@ function AddProductPop({onClose}){
                          onChange={handleValues}
                          className='border-2 border-gray-400 rounded-[3px] p-1 focus:border-orange-500 focus:outline-none w-full' placeholder='Enter Your Product Price' />
                     </div>
-                    <button 
+                      <button 
                     type='submit'
                     className='w-full h-10 bg-orange-500 p-1 text-white font-semibold rounded-[5px] mt-1 active:bg-orange-700'>
                         Add Product
                     </button>
-                </form>
-            </div>  
-        </div>
+                    </form>
+                     <div className=' flex flex-col  w-110 h-50 p-1 border border-gray-300 rounded-[5px] bg-white'>
+                        <h1 className='font-bold ml-1'>Product List</h1>
+                        
+                    </div>
+              </div>
     )
 }
 
-export default AddProductPop;
+export default AddProduct;

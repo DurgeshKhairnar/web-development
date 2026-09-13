@@ -35,11 +35,12 @@ function Login(){
             }
         );
          const jsonRespons = await response.json();
+         console.log(jsonRespons)
          if(response.ok){
-            console.log('login');
             toast.success('Login Successfully')
-            setUserName('');
-            setPassword('');
+              console.log('login');
+            // setUserName('');
+            // setPassword('');
          }else{
              toast.error(`Error ${jsonRespons.message}`)
          }
@@ -54,8 +55,8 @@ function Login(){
 
     return (
      <>
-        <Toaster />
-           <div className='flex h-screen'>
+          <Toaster/>
+           <div className='flex min-h-screen'>
             <div className='w-[50%] h-screen relative'>
                 <img className='w-full h-full object-cover lean' src={restro_bg_image} alt='restro_bg_image' />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
@@ -110,7 +111,8 @@ function Login(){
                             <h1></h1>
                             <p className='text-amber-500'>Forget password?</p>
                         </div>
-                        <button type='submit' className='w-120 h-13 bg-amber-500 rounded-[5px] flex justify-center items-center cursor-pointer'>
+                        <button type='submit'
+                         className='w-120 h-13 bg-amber-500 rounded-[5px] flex justify-center items-center cursor-pointer'>
                             <p className='text-white font-semibold'>{isLoading}</p>
                         </button>
                     </form>

@@ -7,6 +7,9 @@ import Dashboard from './components/pages/Dashboard.jsx';
 import Tables from './components/pages/Tables.jsx';
 import Orders from '../src/components/pages/Orders.jsx';
 import Carts from './components/Carts.jsx';
+import Inventory from './components/pages/Inventory/Inventory.jsx';
+import AddProduct from './components/pages/Inventory/AddProduct.jsx';
+import AddCategory from './components/pages/Inventory/AddCategory.jsx'
 import { CartItemsProvider } from './context/contextCartItems.js';
 
 
@@ -102,6 +105,7 @@ function App() {
                 <Route path='/' element={<Dashboard />} />
                 <Route path='/tables' element={<Tables />} />
                 <Route path='/orders' element={<Orders />} />
+                <Route path='/inventory' element={<Inventory />} /> 
              </Routes>
              <Carts/>
             </CartItemsProvider> 

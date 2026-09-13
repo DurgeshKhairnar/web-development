@@ -6,19 +6,22 @@ function SideBar(){
                 <h2 className='mb-3 font-bold'><i className="ri-restaurant-line"></i> Pos-System</h2>
                 <div className='h-70 w-47 p-2 flex flex-col  justify-evenly'>
                     <NavLink to='/' className={({isActive}) =>
-                    isActive ? 'text-white bg-green-500 p-3 rounded-2xl font-semibold ': 'text-black font-semibold p-3'}><i className="ri-restaurant-2-line"></i>  Dashboard</NavLink>
+                    isActive ? 'text-white bg-amber-500 p-3  font-semibold ': 'text-black font-semibold p-3'}><i className="ri-restaurant-2-line"></i>  Dashboard</NavLink>
 
                     <NavLink to='/tables' className={({isActive}) =>
-                    isActive ? 'text-white bg-green-500 p-3 rounded-2xl font-semibold ': 'text-black font-semibold p-3'}><i className="ri-table-line"></i> Tables</NavLink>
+                    isActive ? 'text-white bg-amber-500 p-3  font-semibold ': 'text-black font-semibold p-3'}><i className="ri-table-line"></i> Tables</NavLink>
 
                     <NavLink to='/orders' className={({isActive}) =>
-                    isActive ?  'text-white bg-green-500 p-3 rounded-2xl font-semibold ': 'text-black font-semibold p-3'}><i className="ri-list-ordered"></i> Orders</NavLink>
+                    isActive ?  'text-white bg-amber-500 p-3  font-semibold ': 'text-black font-semibold p-3'}><i className="ri-list-ordered"></i> Orders</NavLink>
+
+                    <NavLink to='/inventory' className={({isActive}) =>
+                    isActive ?  'text-white bg-amber-500 p-3  font-semibold ': 'text-black font-semibold p-3'}><i className="ri-tools-line"></i>Inventory</NavLink>
 
                     <NavLink to='/o' className={({isActive}) =>
-                    isActive ?  'text-white bg-green-500 p-3 rounded-2xl font-semibold ': 'text-black font-semibold p-3'}><i className="ri-file-chart-line"></i> Reports</NavLink>
+                    isActive ?  'text-white bg-amber-500 p-3  font-semibold ': 'text-black font-semibold p-3'}><i className="ri-file-chart-line"></i> Reports</NavLink>
 
                     <NavLink to='/or' className={({isActive}) =>
-                    isActive ?  'text-white bg-green-500 p-3 rounded-2xl font-semibold ': 'text-black font-semibold p-3'}><i className="ri-tools-line"></i> Setting</NavLink>
+                    isActive ?  'text-white bg-amber-500 p-3  font-semibold ': 'text-black font-semibold p-3'}><i className="ri-tools-line"></i> Setting</NavLink>
                 </div>
             </div>
         </>

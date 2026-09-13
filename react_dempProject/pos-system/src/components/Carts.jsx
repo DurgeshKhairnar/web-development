@@ -33,7 +33,7 @@ function Carts(){
                             <div className='m-1 flex flex-col justify-evenly w-full bg-white p-1 rounded-[5px]'>
                                 <p className='font-bold flex-wrap text-[14px]'>{itm.title}</p>
                                 <div className='flex justify-between'>
-                                    <p className='font-bold text-green-400 text-[13px]'>{itm.price}</p>
+                                    <p className='font-bold text-amber-400 text-[13px]'>{itm.price}</p>
                                     <p className='font-bold text-black text-[13px]'>X</p>
                                     <p className='font-bold text-black text-[13px]'>{itm.count}</p>
                                     <p className='font-bold text-black text-[13px]'>{itm.price * itm.count}</p>
@@ -52,7 +52,7 @@ function Carts(){
             </div>
             <button 
             onClick={()=> setOrderpPop(prev => !prev)}
-            className=' mx-2  h-10 w-full bg-green-500 text-white font-bold rounded-[7px] 
+            className=' mx-2  h-10 w-full bg-amber-500 text-white font-bold rounded-[7px] 
             '>Total : {cartItemsList.reduce((total,item) => ( total += item.count * item.price),0)}</button>
           </div>
           {(isOrderPop) ? <OrderPop onClose={() => setOrderpPop(prev => !prev)} orderList={cartItemsList}/> : <></> } 

@@ -11,7 +11,7 @@ import { useState , useEffect} from 'react';
                 <h1 className='mt-1 font-bold'>Tables</h1>
                   <div className='flex'>
                 <div className='w-40 h-40  bg-white border-2 border-gray-200 rounded-2xl flex flex-col items-center justify-center m-1
-                hover:border-green-500'>
+                hover:border-amber-500'>
                     <div className='bg-gray-200 h-2 w-15 rounded-xl'></div>
                         <div className='flex items-center justify-center'>
                           <div className='bg-gray-200 h-15 w-2 rounded-xl'></div>
