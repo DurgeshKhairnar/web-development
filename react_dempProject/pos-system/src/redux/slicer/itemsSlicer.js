@@ -1,11 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-        items : [{
-                image : 'https://i.pinimg.com/736x/95/9d/07/959d075f1d43263e53f1bbff0dee4baf.jpg',
-                title:'Pizza',
-                price:'120'
-            }]
+     product : []
 }
 
 export const itemsSlice = createSlice({
@@ -13,17 +9,21 @@ export const itemsSlice = createSlice({
     initialState,
     reducers : {
         addItems : (state,action) => {
+            console.log(action.payload)
            const items = {
                 image : action.payload.image,
                 title: action.payload.title,
                 price:action.payload.price,
                 category:action.payload.category
             }
-            state.items.push(items);
+            state.product.push(items);
+        },
+        getProduct : (state,action) => {
+            state.product = action.payload;
         }
     }
 })
 
 
-export const { addItems } = itemsSlice.actions;
+export const { addItems ,getProduct } = itemsSlice.actions;
 export default itemsSlice.reducer;

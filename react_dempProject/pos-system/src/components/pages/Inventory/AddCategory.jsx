@@ -57,7 +57,7 @@ function AddCategory(){
                         <h1 className='font-bold ml-1'>Category List</h1>
                         <div>
                             {
-                                category.map((category , index) => (<h1 key={index}>{category.categoryName}</h1>))
+                                category?.map((category , index) => (<h1 key={category._id}>{category.categoryName}</h1>))
                             }
                         </div>
                     </div>

@@ -39,7 +39,7 @@ function decrement(idx){
             <Category />
             <div className='w-full flex flex-wrap  '>
                     {
-                        items.map((itm,idx) =>{
+                        items?.map((itm,idx) =>{
                         //   const isCart = cartItemsList.find(item => item.id === itm.id);
                           return (
                               <div key={idx} className='m-1 w-40 h-55  rounded-[8px] flex-col flex items-start justify-evenly p-2 border-2

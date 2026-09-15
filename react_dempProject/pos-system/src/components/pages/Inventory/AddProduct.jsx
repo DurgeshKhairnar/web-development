@@ -1,12 +1,17 @@
 import { useState } from 'react';
+import { postProducts , getProducts } from '../../../API/product.js';
+import { useDispatch , useSelector } from 'react-redux';
+import { addItems ,getProduct } from '../../../redux/slicer/itemsSlicer.js';
 
 
 function AddProduct(){
 
+    const dispatch = useDispatch();
+
      const [ productValues , addValues ] = useState({
-            image:'',
-            title:'',
-            category:'',
+            productImage:'',
+            productName:'',
+            categoryName:'',
             price:'',
         })
 
@@ -15,27 +20,32 @@ function AddProduct(){
              addValues(prev => ({...prev,[name]:value}));
          }   
      
-         function handleSubmit(e){
+      async   function handleSubmit(e){
              e.preventDefault();
      
-             if(!productValues.image || !productValues.title
-                 || !productValues.category || !productValues.price
+             if(!productValues.productImage || !productValues.productName
+                 || !productValues.categoryName || !productValues.price
              ){
                  alert('Plz all values')
                  return;
              }
-     
-             dispatch(addItems({
-                 image: productValues.image,
-                 title:productValues.title,
-                 category:productValues.category,
+
+             const products = {
+                 productImage:productValues.productImage,
+                 productName:productValues.productName,
+                 categoryName:productValues.categoryName,
                  price:productValues.price
-             }))
+             }
+
+            const product = await postProducts(products);
+            console.log(`product == ${product.data.productName}`);
+             console.log(`product message == ${product.message}`);
+            dispatch(addItems(product.data));
      
              addValues({
-                 image: '',
-                 category: '',
-                 title: '',
+                 productImage: '',
+                 productName: '',
+                 categoryName: '',
                  price: ''
              })
          }   
@@ -50,8 +60,8 @@ function AddProduct(){
                        <div className='m-1'>
                          <p className='text-[14px] font-semibold'>Product Image</p>
                          <input 
-                         name="image"
-                         value={productValues.image}
+                         name="productImage"
+                         value={productValues.productImage}
                          onChange={handleValues}
                          className='border-2 border-gray-400 rounded-[3px] p-1 focus:border-orange-500 focus:outline-none w-full' placeholder='Paste Your Image Address' />
                     </div>
@@ -60,20 +70,20 @@ function AddProduct(){
                          {/* <input className='border-2 border-gray-400 rounded-[3px] p-1 focus:border-orange-500 focus:outline-none w-full' placeholder='Enter Your Product Name' /> */}
                           
                          <select 
-                         name='category'
-                         value={productValues.category}
+                         name='categoryName'
+                         value={productValues.categoryName}
                          onChange={handleValues}
                          className='w-full h-8 p-1 rounded-[3px] border-2 border-gray-400 focus:border-orange-500 focus:outline-none'>
                             <option value=''>Select Category</option>
                             <option value='Breakfast'>Breakfast</option>
-                            <option value='MainCours'>MainCours</option>
+                            <option value='Main Course'>MainCours</option>
                          </select>
                     </div>
                      <div className='m-1'>
                          <p className='text-[14px] font-semibold'>Product Name</p>
                          <input 
-                         name='title'
-                         value={productValues.title}
+                         name='productName'
+                         value={productValues.productName}
                          onChange={handleValues}
                          className='border-2 border-gray-400 rounded-[3px] p-1 focus:border-orange-500 focus:outline-none w-full' placeholder='Enter Your Product Name' />
                     </div>
