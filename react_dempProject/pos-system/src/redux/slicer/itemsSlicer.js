@@ -11,10 +11,10 @@ export const itemsSlice = createSlice({
         addItems : (state,action) => {
             console.log(action.payload)
            const items = {
-                image : action.payload.image,
-                title: action.payload.title,
+                productImage : action.payload.productImage,
+                productName: action.payload.productName,
                 price:action.payload.price,
-                category:action.payload.category
+                categoryName:action.payload.categoryName
             }
             state.product.push(items);
         },

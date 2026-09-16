@@ -1,12 +1,31 @@
-import { useState } from 'react';
+import { useState ,useEffect } from 'react';
 import { postProducts , getProducts } from '../../../API/product.js';
 import { useDispatch , useSelector } from 'react-redux';
 import { addItems ,getProduct } from '../../../redux/slicer/itemsSlicer.js';
+import { addCategory , getCategory  } from '../../.././redux/slicer/categorySlicer.js';
+import { postCategory , fetchCategory } from '../../../API/category.js';
+import  toast , { Toaster } from 'react-hot-toast';
 
 
 function AddProduct(){
 
     const dispatch = useDispatch();
+    const products = useSelector(state => state.items.product)
+    const category = useSelector(state => state.categorys.category);
+
+    useEffect(() => {
+            async function loadData(){
+                try{
+                       const data = await getProducts();
+                       const categoryData = await fetchCategory();
+                       dispatch(getProduct(data.data));
+                       dispatch(getCategory(categoryData));
+                }catch (e){
+                    console.log(`error ${e.message}`)
+                }
+            }
+            loadData();
+    },[dispatch])
 
      const [ productValues , addValues ] = useState({
             productImage:'',
@@ -37,10 +56,16 @@ function AddProduct(){
                  price:productValues.price
              }
 
-            const product = await postProducts(products);
-            console.log(`product == ${product.data.productName}`);
-             console.log(`product message == ${product.message}`);
-            dispatch(addItems(product.data));
+             try{
+                  const product = await postProducts(products);
+                  console.log(`product message == ${product.message}`);
+                  toast.custom(product.message);
+                  dispatch(addItems(product.data));
+             }catch(e){
+                toast.error(e.message);
+             }
+
+           
      
              addValues({
                  productImage: '',
@@ -52,6 +77,7 @@ function AddProduct(){
 
     return (
         <div className='flex justify-evenly'>
+            <Toaster/>
                     <form onSubmit={handleSubmit} className=' flex flex-col justify-evenly w-90  p-1 border border-gray-300 rounded-[5px] bg-white'>
                       <div>
                               <h1 className='font-bold ml-1'>Add New Product</h1>
@@ -75,8 +101,13 @@ function AddProduct(){
                          onChange={handleValues}
                          className='w-full h-8 p-1 rounded-[3px] border-2 border-gray-400 focus:border-orange-500 focus:outline-none'>
                             <option value=''>Select Category</option>
-                            <option value='Breakfast'>Breakfast</option>
-                            <option value='Main Course'>MainCours</option>
+                            {/* <option value='Breakfast'>Breakfast</option> */}
+                            
+                            {
+                                category?.map((category,index) => (
+                                    <option key={index} value={category.categoryName}>{category.categoryName}</option>
+                                ))
+                            }
                          </select>
                     </div>
                      <div className='m-1'>
@@ -101,9 +132,30 @@ function AddProduct(){
                         Add Product
                     </button>
                     </form>
-                     <div className=' flex flex-col  w-110 h-50 p-1 border border-gray-300 rounded-[5px] bg-white'>
+                 <div className=' flex flex-col  w-110  p-1 border border-gray-300 rounded-[5px] bg-white'>
                         <h1 className='font-bold ml-1'>Product List</h1>
-                        
+                        <div>
+                            <div className={'h-7 w-full bg-gray-100 flex justify-between items-center px-2 font-bold text-[10px]'}>
+                                <p>#</p>
+                                <p>Image</p>
+                                <p>Product Name</p>
+                                <p>Category</p>
+                                <p>Price(₹)</p>
+                                <p>Action</p>
+                            </div>
+                                {
+                                    products?.map((items,index) => (<div key={index} className={'h-10 w-full border border-gray-100 m-1  flex justify-around items-center px-2 text-[10px]'}><p>{index+1}</p>
+                                    <img className={'object-contain h-7 w-7 rounded-full'} src={items.productImage}/>
+                                    <p>{items.productName}</p>
+                                    <p>{items.categoryName}</p>
+                                    <p>{items.price}</p>
+                                    <div className='flex justify-between items-center w-10'>
+                                        <i className="ri-delete-bin-7-line text-red-600 text-[15px]"></i>
+                                        <i className="ri-pencil-line text-blue-500 text-[15px]"></i>
+                                    </div>
+                                    </div>))
+                                }
+                        </div>
                     </div>
               </div>
     )
