@@ -34,13 +34,12 @@ function App() {
 
 
   function addItems(item) {
-    console.log(item.id)
   if (!item) return;
 
   setItemsList(prev => {
 
     const alreadyExists = prev.find(
-      itm => itm.id === item.id
+      itm => itm._id === item._id
     );
 
     if (alreadyExists) {
@@ -61,7 +60,7 @@ function App() {
       console.log(idx)
        setItemsList(prev =>
         prev.map(itm =>
-          itm.id === idx
+          itm._id === idx
             ? {
                 ...itm,
                 count: itm.count + 1

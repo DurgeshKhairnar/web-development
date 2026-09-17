@@ -29,9 +29,9 @@ function Carts(){
                             <div key={idx}
                             className='w-full h-20 bg-gray-100 rounded-[5px] flex p-1 m-1 '
                             >
-                            <img src={itm.image} alt='img' className='rounded-[5px] object-contain' />
-                            <div className='m-1 flex flex-col justify-evenly w-full bg-white p-1 rounded-[5px]'>
-                                <p className='font-bold flex-wrap text-[14px]'>{itm.title}</p>
+                            <img src={itm.productImage} alt='img' className='rounded-[5px] object-contain' />
+                            <div className=' flex flex-col justify-evenly w-full bg-white p-1 rounded-[5px]'>
+                                <p className='font-bold flex-wrap text-[14px]'>{itm.productName}</p>
                                 <div className='flex justify-between'>
                                     <p className='font-bold text-amber-400 text-[13px]'>{itm.price}</p>
                                     <p className='font-bold text-black text-[13px]'>X</p>

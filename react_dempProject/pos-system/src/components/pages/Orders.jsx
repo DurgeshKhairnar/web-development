@@ -24,7 +24,7 @@ function Orders(){
                                 
                                 <div key={index} className='flex flex-col'>
                                     <div className='flex  justify-between '>
-                                        <p className='text-gray-500'>{items.title}</p>
+                                        <p className='text-gray-500'>{items.productName}</p>
                                         <p>{items.count}</p>
                                     </div>
                                 </div>       

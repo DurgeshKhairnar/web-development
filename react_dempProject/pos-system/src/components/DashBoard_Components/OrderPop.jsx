@@ -38,7 +38,7 @@ function OrderPop(props){
                                 
                                 <div key={index}>
                                     <div className='flex justify-between '>
-                                        <p className='text-gray-500'>{items.title}</p>
+                                        <p className='text-gray-500'>{items.productName}</p>
                                         <p>{items.count}</p>
                                     </div>
                                 </div>       

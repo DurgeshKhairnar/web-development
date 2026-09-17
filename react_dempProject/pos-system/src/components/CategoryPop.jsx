@@ -80,7 +80,7 @@ function CategoryPop({onClose}){
                             </button>
                         </div>
                         <div>
-                            <p className='font-bold text-[12px] m-1'>Category Name</p>
+                            <p className='font-bold text-[12px] m-1'>Category1 Name</p>
                             <input 
                             value={categoryName}
                             onChange={(e) => setCategoryName(e.target.value)}
