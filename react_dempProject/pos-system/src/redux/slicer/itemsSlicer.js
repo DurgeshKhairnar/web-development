@@ -20,10 +20,20 @@ export const itemsSlice = createSlice({
         },
         getProduct : (state,action) => {
             state.product = action.payload;
+        },
+        updateProduct : (state,action) => {
+            console.log(action.payload._id)
+             const items = {
+                productImage : action.payload.productImage,
+                productName: action.payload.productName,
+                price:action.payload.price,
+                categoryName:action.payload.categoryName
+            }
+            state.product.push(items);
         }
     }
 })
 
 
-export const { addItems ,getProduct } = itemsSlice.actions;
+export const { addItems ,getProduct , updateProduct } = itemsSlice.actions;
 export default itemsSlice.reducer;

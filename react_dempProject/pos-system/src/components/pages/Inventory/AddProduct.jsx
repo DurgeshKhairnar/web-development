@@ -1,8 +1,8 @@
 import { useState ,useEffect } from 'react';
-import { postProducts , getProducts } from '../../../API/product.js';
+import { postProducts , getProducts, putProduct , deleteProduct } from '../../../API/product.js';
 import { useDispatch , useSelector } from 'react-redux';
-import { addItems ,getProduct } from '../../../redux/slicer/itemsSlicer.js';
-import { addCategory , getCategory  } from '../../.././redux/slicer/categorySlicer.js';
+import { addItems ,getProduct , updateProduct } from '../../../redux/slicer/itemsSlicer.js';
+import { addCategory , getCategory  , } from '../../.././redux/slicer/categorySlicer.js';
 import { postCategory , fetchCategory } from '../../../API/category.js';
 import  toast , { Toaster } from 'react-hot-toast';
 
@@ -13,8 +13,7 @@ function AddProduct(){
     const products = useSelector(state => state.items.product)
     const category = useSelector(state => state.categorys.category);
 
-    useEffect(() => {
-            async function loadData(){
+     async function loadData(){
                 try{
                        const data = await getProducts();
                        const categoryData = await fetchCategory();
@@ -24,6 +23,8 @@ function AddProduct(){
                     console.log(`error ${e.message}`)
                 }
             }
+
+    useEffect(() => {    
             loadData();
     },[dispatch])
 
@@ -34,6 +35,9 @@ function AddProduct(){
             price:'',
         })
 
+      const [ updateToggle , setUpdateToggle ] = useState(false);
+      const [ id , setId ] = useState(0);    
+
        function handleValues(e){
              const { name , value } = e.target;
              addValues(prev => ({...prev,[name]:value}));
@@ -41,7 +45,10 @@ function AddProduct(){
      
       async   function handleSubmit(e){
              e.preventDefault();
-     
+            console.log(productValues.productImage)
+            console.log(productValues.productName)
+            console.log(productValues.categoryName)
+            console.log(productValues.price)
              if(!productValues.productImage || !productValues.productName
                  || !productValues.categoryName || !productValues.price
              ){
@@ -56,16 +63,27 @@ function AddProduct(){
                  price:productValues.price
              }
 
-             try{
-                  const product = await postProducts(products);
+             console.log(updateToggle)
+            if(updateToggle){
+                 try{
+                  const product = await putProduct(products,id);
                   console.log(`product message == ${product.message}`);
-                  toast.custom(product.message);
+                  toast.success(product.message);
+                  loadData();
+                //   dispatch(updateProduct(product.data));
+                }catch(e){
+                    toast.error(e.message);
+                } 
+            }  else{
+                try{
+                const product = await postProducts(products);
+                  console.log(`product message == ${product.message}`);
+                  toast.success(product.message);
                   dispatch(addItems(product.data));
-             }catch(e){
-                toast.error(e.message);
-             }
-
-           
+                }catch(e){
+                    toast.error(e.message);
+                } 
+            }
      
              addValues({
                  productImage: '',
@@ -73,7 +91,27 @@ function AddProduct(){
                  categoryName: '',
                  price: ''
              })
-         }   
+              setUpdateToggle(false);
+         }  
+         
+      function editProduct(items){
+        // console.log(items)
+        setId(items._id)
+        setUpdateToggle(true);
+          addValues({
+                 productImage:items.productImage,
+                 productName:items.productName,
+                 categoryName:items.categoryName,
+                 price:items.price
+             })
+      } 
+      
+     async function removeProduct(){
+       const response = await deleteProduct(id);
+       const jsonResponse = await response.json();
+       toast.success(jsonResponse.message)
+          setId(0)
+     }
 
     return (
         <div className='flex justify-evenly'>
@@ -129,7 +167,7 @@ function AddProduct(){
                       <button 
                     type='submit'
                     className='w-full h-10 bg-orange-500 p-1 text-white font-semibold rounded-[5px] mt-1 active:bg-orange-700'>
-                        Add Product
+                     { (updateToggle) ? 'Update Product' :'Add Product'}
                     </button>
                     </form>
                  <div className=' flex flex-col  w-110  p-1 border border-gray-300 rounded-[5px] bg-white'>
@@ -146,12 +184,19 @@ function AddProduct(){
                                 {
                                     products?.map((items,index) => (<div key={index} className={'h-10 w-full border border-gray-100 m-1  flex justify-around items-center px-2 text-[10px]'}><p>{index+1}</p>
                                     <img className={'object-contain h-7 w-7 rounded-full'} src={items.productImage}/>
-                                    <p>{items.productName}</p>
-                                    <p>{items.categoryName}</p>
+                                    <p className='font-bold'>{items.productName}</p>
+                                    <p className='font-bold'>{items.categoryName}</p>
                                     <p>{items.price}</p>
                                     <div className='flex justify-between items-center w-10'>
-                                        <i className="ri-delete-bin-7-line text-red-600 text-[15px]"></i>
-                                        <i className="ri-pencil-line text-blue-500 text-[15px]"></i>
+                                        <button
+                                        onClick={() => {
+                                            removeProduct(),
+                                            setId(items._id)
+                                        }}
+                                        ><i className="ri-delete-bin-7-line text-red-600 text-[15px]"></i></button>
+                                        <button
+                                         onClick={() => editProduct(items)}
+                                        ><i className="ri-pencil-line text-blue-500 text-[15px]"></i></button>
                                     </div>
                                     </div>))
                                 }

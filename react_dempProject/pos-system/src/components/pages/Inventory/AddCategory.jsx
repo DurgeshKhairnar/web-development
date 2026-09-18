@@ -56,8 +56,20 @@ function AddCategory(){
                      <div className=' flex flex-col  w-110 h-50 p-1 border border-gray-300 rounded-[5px] bg-white'>
                         <h1 className='font-bold ml-1'>Category List</h1>
                         <div>
+                            <div className={'h-7 w-full bg-gray-100 flex justify-between items-center px-2 font-bold text-[10px]'}>
+                                <p>#</p>
+                                <p>Category Name</p>
+                                <p>Action</p>
+                            </div>
                             {
-                                category?.map((category , index) => (<h1 key={category._id}>{category.categoryName}</h1>))
+                                category?.map((category , index) => (<div className='h-10 w-full border border-gray-100 m-1  flex justify-evenly items-center px-2 text-[10px]' key={category._id}>
+                                    <p>{index+1}</p>
+                                    <p>{category.categoryName}</p>
+                                     <div className='flex justify-between items-center w-10'>
+                                        <i className="ri-delete-bin-7-line text-red-600 text-[15px]"></i>
+                                        <i className="ri-pencil-line text-blue-500 text-[15px]"></i>
+                                    </div>
+                                </div>))
                             }
                         </div>
                     </div>

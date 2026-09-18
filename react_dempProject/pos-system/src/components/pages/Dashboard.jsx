@@ -2,18 +2,28 @@ import Search from '../Search.jsx';
 import { useItems } from '../../context/contextCartItems.js';
 import { useState , useEffect } from 'react'; 
 import AddProductPop from '../DashBoard_Components/AddProductPop.jsx';
+import { getProducts } from'../../API/product.js';
+import { fetchCategory } from'../../API/category.js';
 import Category from '../Category.jsx';
-import  { useSelector , useDispatch } from 'react-redux';
+import  { useSelector , useDispatch} from 'react-redux';
+import { getProduct } from '../../redux/slicer/itemsSlicer.js';
+import { getCategory } from '../../redux/slicer/categorySlicer.js';
+
 function Dashboard(){
 
     const products = useSelector(state => state.items.product)
-    const dispatch = useDispatch();
     const {cartItemsList,addItems , addQuantity,removeQuantity} = useItems();
-
+    const dispatch = useDispatch();
 
 
   useEffect(() => {
-     
+        async function load(){
+               const data = await getProducts();
+               const categoryData = await fetchCategory();
+               dispatch(getProduct(data.data));
+               dispatch(getCategory(categoryData));
+        }
+        load();
   },[])
 
 
@@ -23,7 +33,6 @@ function Dashboard(){
 
 function increment(idx){
      addQuantity(idx)
-    // setDisplayItems(prv => prv.map(itm => itm.id == idx ? {...itm,count:itm.count+1}:itm))
 }
 
 
@@ -44,7 +53,6 @@ function decrement(idx){
                           return (
                               <div key={idx} className='m-1 w-40 h-55  rounded-[8px] flex-col flex items-start justify-evenly p-2 border-2
                               border-gray-300 bg-white shadow-[0_0px_7px_rgba(0,0,0,0.15)] hover:border-amber-500  hover:border-2 relative'>
-                                <button><i className="ri-delete-bin-6-line top-1 right-1.5  absolute"></i></button>
                                   <img src={itm.productImage} className='object-contain rounded-2xl h-25 mx-auto '/>
                                   <p className='font-bold flex-wrap text-[15px]'>{itm.productName}</p>
                                   <p className='font-semibold flex-wrap text-amber-400 text-[13px]'>{itm.price}</p>
