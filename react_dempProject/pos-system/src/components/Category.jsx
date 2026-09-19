@@ -10,7 +10,7 @@ function Category(){
     return (
          <div className='p-1 mt-1 mb-2 w-full flex flex-wrap items-center justify-start'>
                 {
-                    category.map((cate,idx) =>(
+                    category?.map((cate,idx) =>(
                         <button
                         key={cate._id}  
                         onClick={() =>setCategoryNumber(idx)}

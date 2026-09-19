@@ -66,20 +66,20 @@ function AddProduct(){
              console.log(updateToggle)
             if(updateToggle){
                  try{
+                    dispatch(updateProduct(products));
                   const product = await putProduct(products,id);
                   console.log(`product message == ${product.message}`);
                   toast.success(product.message);
                   loadData();
-                //   dispatch(updateProduct(product.data));
                 }catch(e){
                     toast.error(e.message);
                 } 
             }  else{
                 try{
+                dispatch(addItems(products));
                 const product = await postProducts(products);
-                  console.log(`product message == ${product.message}`);
-                  toast.success(product.message);
-                  dispatch(addItems(product.data));
+                console.log(`product message == ${product.message}`);
+                toast.success(product.message); 
                 }catch(e){
                     toast.error(e.message);
                 } 
@@ -106,11 +106,11 @@ function AddProduct(){
              })
       } 
       
-     async function removeProduct(){
-       const response = await deleteProduct(id);
-       const jsonResponse = await response.json();
-       toast.success(jsonResponse.message)
-          setId(0)
+     async function removeProduct(id){
+        console.log(id)
+       await deleteProduct(id);
+       loadData();
+       toast.success('Product delete Successfully');
      }
 
     return (
@@ -190,8 +190,7 @@ function AddProduct(){
                                     <div className='flex justify-between items-center w-10'>
                                         <button
                                         onClick={() => {
-                                            removeProduct(),
-                                            setId(items._id)
+                                            removeProduct(items._id);
                                         }}
                                         ><i className="ri-delete-bin-7-line text-red-600 text-[15px]"></i></button>
                                         <button

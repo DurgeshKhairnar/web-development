@@ -22,13 +22,14 @@ export const itemsSlice = createSlice({
             state.product = action.payload;
         },
         updateProduct : (state,action) => {
-            console.log(action.payload._id)
+            const id = action.payload._id;
              const items = {
                 productImage : action.payload.productImage,
                 productName: action.payload.productName,
                 price:action.payload.price,
                 categoryName:action.payload.categoryName
             }
+            
             state.product.push(items);
         }
     }
