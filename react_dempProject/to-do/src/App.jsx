@@ -3,10 +3,10 @@ import './App.css'
 import InputBox from './components/InputBox';
 import TaskList from './components/TaskList';
 import {todoList , TodoProvider , useTodo }  from './context/usecontext';
- 
+import Demo from './components/Demo';
 
 function App() {
-  
+
 
     const [todoList , setTodoList] = useState(() => {
   const savedTodos = localStorage.getItem("todos");
@@ -38,8 +38,9 @@ useEffect(() => {
 
   return (
     <TodoProvider value={{todoList , addTask ,removeTask , updateTask}}>
-        <InputBox />
-        <TaskList />
+        <Demo />
+        {/* <InputBox />
+        <TaskList /> */}
     </TodoProvider>
   )
 }
