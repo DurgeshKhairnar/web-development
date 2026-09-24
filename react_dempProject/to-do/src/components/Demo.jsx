@@ -18,10 +18,11 @@ function Demo(){
             moNumber:mbNumber
         }
         setInfoList(prev => {
-           const updateList = prev.filter((itm) => itm.id == myId);
-
-           if(isUpdate){
-            return updateList.map((itm => [...prev,myList]))
+           const updateList = prev.some((itm) => itm.id == myId);
+           console.log(updateList);
+           if(updateList){
+            console.log('is called')
+            return prev.map((item) => item.id == myId ? {...item,name:text,moNumber:mbNumber} : item)
            }
 
            return [...prev,myList];
@@ -29,6 +30,11 @@ function Demo(){
 
         setText('');
         setNumber('')
+    }
+
+    function removeList(id){
+        const currentList = infoList.filter((item) => item.id !== id);
+        setInfoList(currentList);
     }
 
     return (
@@ -66,6 +72,9 @@ function Demo(){
                                }}
                                className='h-7 w-7 bg-blue-400 rounded-full text-white m-1 cursor-pointer'>U</button>
                                <button 
+                               onClick={() => {
+                                    removeList(item.id);
+                               }}
                                className='h-7 w-7 bg-red-400 rounded-full text-white m-1 cursor-pointer'>D</button>
                             </div>    
                         </div>   
