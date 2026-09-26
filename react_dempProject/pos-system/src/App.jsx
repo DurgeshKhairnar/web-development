@@ -106,7 +106,7 @@ function App() {
                 <Route path='/orders' element={<Orders />} />
                 <Route path='/inventory' element={<Inventory />} /> 
              </Routes>
-             <Carts/>
+             {/* <Carts/> */}
             </CartItemsProvider> 
           </div>
     </>

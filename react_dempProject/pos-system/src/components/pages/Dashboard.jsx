@@ -8,6 +8,7 @@ import Category from '../Category.jsx';
 import  { useSelector , useDispatch} from 'react-redux';
 import { getProduct } from '../../redux/slicer/itemsSlicer.js';
 import { getCategory } from '../../redux/slicer/categorySlicer.js';
+import Carts from '../Carts.jsx';
 
 function Dashboard(){
 
@@ -43,7 +44,8 @@ function decrement(idx){
 
 
     return(
-        <div className='flex flex-col min-h-screen w-full bg-gray-100 p-2 relative'>
+        <div className='flex  min-h-screen w-full bg-gray-100 p-2 relative justify-between'>
+            <div className='flex flex-col'>
             <Search/>
             <Category />
             <div className='w-full flex flex-wrap  '>
@@ -74,12 +76,8 @@ function decrement(idx){
                        })
                     }
             </div>
-            <button 
-              onClick={() => (setPop(prev => !prev))}
-            className='absolute w-12 h-12 flex justify-center items-center bg-white rounded-full border-2 border-gray-200 text-2xl shadow-2xl right-10 bottom-10 cursor-pointer hover:border-amber-500 '>
-                    +
-            </button>
-            {(addPop) ? <AddProductPop onClose={() =>   setPop(prev => !prev)} /> : <></>} 
+            </div>
+            <Carts/>
         </div>
     );
 }

@@ -19,7 +19,7 @@ function Carts(){
     }
     
     return (
-         <div className={`min-h-screen w-120 p-2 flex flex-col ${(cartItemsList.length > 0) ? 'items-start' :'items-center'} justify-between bg-white`}>
+         <div className={`min-h-screen w-90 p-2 flex flex-col ${(cartItemsList.length > 0) ? 'items-start' :'items-center'} justify-between bg-white`}>
            <div className='w-full'>
                 <p className='font-semibold text-[20px]'>Invoice</p>
                 
