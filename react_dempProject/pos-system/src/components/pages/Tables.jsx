@@ -42,15 +42,15 @@ import Table from '../Table.jsx';
                         <input
                         name='name'
                         value={customerInfo.name} 
-                        onChange={(e) => setCustomerInfo(e.target.value)}
+                        onChange={handleChange}
                         className='h-8 border border-gray-400 focus:border-2 focus:border-amber-500 focus:outline-none p-1'placeholder='Enter your name' />
                     </div>
                      <div className='flex flex-col m-1'>
                         <label className='font-bold'>Phone Number</label>
                         <input 
                         name='phoneNumber'
-                        value={customerInfo.phoneNumner}
-                        onChange={(e) => setCustomerInfo(e.target.value)}
+                        value={customerInfo.phoneNumber}
+                        onChange={handleChange}
                         className='h-8 border border-gray-400 focus:border-2 focus:border-amber-500 focus:outline-none p-1'placeholder='Enter your phone number' />
                     </div>
                      <div className='flex justify-between'>
@@ -59,7 +59,7 @@ import Table from '../Table.jsx';
                         <input
                         name='date'
                         value={customerInfo.date}
-                        onChange={(e) => setCustomerInfo(e.target.value)}
+                        onChange={handleChange}
                         type='date'
                         className='h-8 border border-gray-400 focus:border-2 focus:border-amber-500 focus:outline-none p-1'placeholder='select date' />
                     </div>
@@ -68,7 +68,7 @@ import Table from '../Table.jsx';
                         <input
                         name='time'
                         value={customerInfo.time}
-                        onChange={(e) => setCustomerInfo(e.target.value)}
+                        onChange={handleChange}
                         type='time'
                         className='h-8 border border-gray-400 focus:border-2 focus:border-amber-500 focus:outline-none p-1'placeholder='select date' />
                     </div>
@@ -78,7 +78,7 @@ import Table from '../Table.jsx';
                         <input 
                         name='gest'
                         value={customerInfo.gest}
-                        onChange={(e) => setCustomerInfo(e.target.value)}
+                        onChange={handleChange}
                         className='h-8 border border-gray-400 focus:border-2 focus:border-amber-500 focus:outline-none p-1'placeholder='Number of Person' />
                     </div>
                      <div className='flex flex-col m-1'>
@@ -86,7 +86,7 @@ import Table from '../Table.jsx';
                         <input 
                         name='tableNo'
                         value={customerInfo.tableNo}
-                        onChange={(e) => setCustomerInfo(e.target.value)}
+                        onChange={handleChange}
                         className='h-8 border border-gray-400 focus:border-2 focus:border-amber-500 focus:outline-none p-1'placeholder='Number of Person' />
                     </div>
                        <button 
