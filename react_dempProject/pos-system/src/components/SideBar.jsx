@@ -15,7 +15,10 @@ function SideBar(){
                     isActive ?  'text-white bg-amber-500 p-3  font-semibold ': 'text-black font-semibold p-3'}><i className="ri-list-ordered"></i> Orders</NavLink>
 
                     <NavLink to='/inventory' className={({isActive}) =>
-                    isActive ?  'text-white bg-amber-500 p-3  font-semibold ': 'text-black font-semibold p-3'}><i className="ri-tools-line"></i>Inventory</NavLink>
+                    isActive ?  'text-white bg-amber-500 p-3  font-semibold ': 'text-black font-semibold p-3'}><i className="ri-file-list-line"></i> Inventory</NavLink>
+
+                    <NavLink to='/booking' className={({isActive}) =>
+                    isActive ?  'text-white bg-amber-500 p-3  font-semibold ': 'text-black font-semibold p-3'}><i className="ri-git-repository-commits-line"></i> Booking</NavLink>
 
                     <NavLink to='/o' className={({isActive}) =>
                     isActive ?  'text-white bg-amber-500 p-3  font-semibold ': 'text-black font-semibold p-3'}><i className="ri-file-chart-line"></i> Reports</NavLink>

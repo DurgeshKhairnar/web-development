@@ -1,5 +1,5 @@
 import Search from '../Search.jsx';
-import { useItems } from '../../context/contextCartItems.js';
+// import { useItems } from '../../context/contextCartItems.js';
 import { useState , useEffect } from 'react'; 
 import AddProductPop from '../DashBoard_Components/AddProductPop.jsx';
 import { getProducts } from'../../API/product.js';
@@ -9,11 +9,13 @@ import  { useSelector , useDispatch} from 'react-redux';
 import { getProduct } from '../../redux/slicer/itemsSlicer.js';
 import { getCategory } from '../../redux/slicer/categorySlicer.js';
 import Carts from '../Carts.jsx';
+import { addItem ,incrementItem , decrementItem } from '../../redux/slicer/cartSlicer.js';
 
 function Dashboard(){
 
     const products = useSelector(state => state.items.product)
-    const {cartItemsList,addItems , addQuantity,removeQuantity} = useItems();
+    const carts = useSelector(state => state.carts.cart)
+
     const dispatch = useDispatch();
 
 
@@ -32,15 +34,18 @@ function Dashboard(){
  
 
 
-function increment(idx){
-     addQuantity(idx)
+function increment(id){
+    dispatch(incrementItem(id))
 }
 
 
-function decrement(idx){
-  removeQuantity(idx)
+function decrement(id){
+    dispatch(decrementItem(id))
 }
 
+function addItems(item){
+    dispatch(addItem(item));
+}
 
 
     return(
@@ -51,7 +56,7 @@ function decrement(idx){
             <div className='w-full flex flex-wrap  '>
                     {
                         products?.map((itm,idx) =>{
-                           const isCart = cartItemsList.find(item => item._id === itm._id);
+                           const isCart = carts?.find(item => item._id === itm._id);
                           return (
                               <div key={idx} className='m-1 w-40 h-55  rounded-[8px] flex-col flex items-start justify-evenly p-2 border-2
                               border-gray-300 bg-white shadow-[0_0px_7px_rgba(0,0,0,0.15)] hover:border-amber-500  hover:border-2 relative'>
@@ -64,11 +69,11 @@ function decrement(idx){
                                     >+</button>
                                     {isCart.count}
                                     <button className='p-1 bg-amber-400 text-white rounded-2xl w-10'
-                                    onClick={() => decrement(itm.id)}
+                                    onClick={() => decrement(itm._id)}
                                     >-</button>
                                   </div> ) : (<button className={`border-none   w-full p-2 rounded-2xl font-semibold bg-amber-200 cursor-pointer active:bg-amber-600 active:text-white`}
                                   onClick={() => {
-                                      addItems(itm)
+                                     addItems(itm);
                                   }}
                                   >ADD to Dish</button>)}
                               </div>

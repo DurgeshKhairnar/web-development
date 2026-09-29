@@ -1,113 +1,39 @@
 import { useState , useEffect} from 'react'
 import { Routes , Route } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
 import './App.css'
 import SideBar from './components/SideBar.jsx';
 import Dashboard from './components/pages/Dashboard.jsx';
 import Tables from './components/pages/Tables.jsx';
 import Orders from '../src/components/pages/Orders.jsx';
-import Carts from './components/Carts.jsx';
 import Inventory from './components/pages/Inventory/Inventory.jsx';
-import AddProduct from './components/pages/Inventory/AddProduct.jsx';
-import AddCategory from './components/pages/Inventory/AddCategory.jsx'
-import { CartItemsProvider } from './context/contextCartItems.js';
-
-
+import Booking from './components/pages/Booking.jsx';
 
 function App() {
    
-   const [products, addProducts ] = useState(() => {
-      const allProducts = localStorage.getItem('myProducts')
-      return (allProducts) ? JSON.parse(allProducts) : [];
-   });
+  //  const [products, addProducts ] = useState(() => {
+  //     const allProducts = localStorage.getItem('myProducts')
+  //     return (allProducts) ? JSON.parse(allProducts) : [];
+  //  });
 
-   useEffect(() => {
-      localStorage.setItem('myProducts',JSON.stringify(products))
-   },[products])
-
-
-   const [category , setCategory] = useState([]);
-
-   const [cartItemsList , setItemsList] = useState([]);
-
-   const [orderList , setOrderList] = useState([]);
+  //  useEffect(() => {
+  //     localStorage.setItem('myProducts',JSON.stringify(products))
+  //  },[products])
 
 
-  function addItems(item) {
-  if (!item) return;
 
-  setItemsList(prev => {
-
-    const alreadyExists = prev.find(
-      itm => itm._id === item._id
-    );
-
-    if (alreadyExists) {
-      return prev;
-    }
-
-  return [
-      ...prev,
-      {
-        ...item,
-        count: 1
-      }
-    ];
-  });
-}
-
-    function addQuantity(idx){
-      console.log(idx)
-       setItemsList(prev =>
-        prev.map(itm =>
-          itm._id === idx
-            ? {
-                ...itm,
-                count: itm.count + 1
-              }
-            : itm
-        )
-     );
-    }
-
-     function removeQuantity(idx){
-      console.log(idx)
-       setItemsList(prev =>
-        prev.map(itm =>
-          itm.id === idx &&  itm.count > 0
-            ? {
-                ...itm,
-                count: itm.count - 1
-              }
-            : itm
-        )
-     );
-     if( cartItemsList.find((itm) => itm.id === idx).count == 1){
-        removeItem(idx)
-     }
-    }
-
-   function removeItem(id){
-     const removeList =  cartItemsList.filter((item) => item.id !== id );
-      setItemsList(removeList)
-   }
 
   return (
     <>
             <div className='w-full min-h-screen flex'>
-            <CartItemsProvider value={{cartItemsList,addItems,removeItem,addQuantity,removeQuantity,setItemsList,
-              orderList , setOrderList, products, addProducts,
-              category , setCategory
-            }}>
+         
              <SideBar/>
              <Routes>
                 <Route path='/' element={<Dashboard />} />
                 <Route path='/tables' element={<Tables />} />
                 <Route path='/orders' element={<Orders />} />
-                <Route path='/inventory' element={<Inventory />} /> 
+                <Route path='/inventory' element={<Inventory />} />
+                <Route path='/booking' element={<Booking />} />  
              </Routes>
-             {/* <Carts/> */}
-            </CartItemsProvider> 
           </div>
     </>
   )

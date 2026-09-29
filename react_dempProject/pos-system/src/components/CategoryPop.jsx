@@ -1,11 +1,11 @@
 import { useState , useEffect } from 'react';
-import { useItems } from '../context/contextCartItems.js';
+// import { useItems } from '../context/contextCartItems.js';
 import toast , {Toaster} from 'react-hot-toast';
 
 function CategoryPop({onClose}){
 
     const [categoryName, setCategoryName ] = useState('');
-     const { category , setCategory } = useItems();
+    //  const { category , setCategory } = useItems();
 
     const [isLoading, setLoading ] = useState('Add Category');
 

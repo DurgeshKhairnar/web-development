@@ -1,13 +1,15 @@
-import { useItems } from '../context/contextCartItems.js';
+// import { useItems } from '../context/contextCartItems.js';
 import { useState } from 'react';
 import  OrderPop from '../components/DashBoard_Components/OrderPop.jsx';
 import empty_orders from '../assets/empty_orders.png';
+import  { useSelector , useDispatch} from 'react-redux';
 
 function Carts(){
 
-    const { cartItemsList} = useItems();
+    // const { cartItemsList } = useItems();
 
     const [isOrderPop , setOrderpPop] = useState(false);
+    const carts = useSelector(state => state.carts.cart)
 
     function emptyListIcon(){
         return (
@@ -19,13 +21,13 @@ function Carts(){
     }
     
     return (
-         <div className={`min-h-screen w-90 p-2 flex flex-col ${(cartItemsList.length > 0) ? 'items-start' :'items-center'} justify-between bg-white`}>
+         <div className={`min-h-screen w-90 p-2 flex flex-col ${(carts.length > 0) ? 'items-start' :'items-center'} justify-between bg-white`}>
            <div className='w-full'>
                 <p className='font-semibold text-[20px]'>Invoice</p>
                 
                 <div className='w-full p-2 h-100'>
                     {
-                       (cartItemsList.length > 0) ? (cartItemsList.map((itm,idx) => (
+                       (carts.length > 0) ? (carts.map((itm,idx) => (
                             <div key={idx}
                             className='w-full h-20 bg-gray-100 rounded-[5px] flex p-1 m-1 '
                             >
@@ -53,9 +55,9 @@ function Carts(){
             <button 
             onClick={()=> setOrderpPop(prev => !prev)}
             className=' mx-2  h-10 w-full bg-amber-500 text-white font-bold rounded-[7px] 
-            '>Total : {cartItemsList.reduce((total,item) => ( total += item.count * item.price),0)}</button>
+            '>Total : {carts.reduce((total,item) => ( total += item.count * item.price),0)}</button>
           </div>
-          {(isOrderPop) ? <OrderPop onClose={() => setOrderpPop(prev => !prev)} orderList={cartItemsList}/> : <></> } 
+          {(isOrderPop) ? <OrderPop onClose={() => setOrderpPop(prev => !prev)} orderList={carts}/> : <></> } 
         </div>
     );
 }

@@ -1,6 +1,6 @@
 import  { useState , useEffect } from 'react';
 import CategoryPop from './CategoryPop';
-import { useItems } from '../context/contextCartItems.js';
+
 import { useSelector } from 'react-redux';
 
 function Category(){

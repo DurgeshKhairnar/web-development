@@ -1,4 +1,4 @@
-import { useItems } from '../../context/contextCartItems.js';
+// import { useItems } from '../../context/contextCartItems.js';
 import { useState } from 'react'; 
 import { addItems } from '../../redux/slicer/itemsSlicer.js';
 import { useDispatch } from 'react-redux';
@@ -7,7 +7,7 @@ function AddProductPop({onClose}){
 
     const dispatch = useDispatch();
 
-    const { products, addProducts} = useItems();
+    // const { products, addProducts} = useItems();
 
     const [ productValues , addValues ] = useState({
         image:'',

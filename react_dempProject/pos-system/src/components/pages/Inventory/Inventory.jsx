@@ -2,10 +2,13 @@ import { useState } from 'react';
 import AddCategory from './AddCategory';
 import AddProduct from './AddProduct';
 import AddTable from './AddTables';
+import { useLocation } from 'react-router-dom';
 
 function Inventory(){
 
-   
+   const location = useLocation();
+   const item = location.state;
+   console.log(item);
 
     const [isTab , setTab ] = useState('Product');
 

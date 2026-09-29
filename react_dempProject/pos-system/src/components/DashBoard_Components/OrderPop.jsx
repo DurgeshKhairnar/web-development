@@ -1,23 +1,24 @@
-import { useItems } from '../../context/contextCartItems.js';
-
+// import { useItems } from '../../context/contextCartItems.js';
+import { useDispatch , useSelector } from 'react-redux';
+import { getOrder } from '../../redux/slicer/orderSlicer.js';
+import { clearCart } from '../../redux/slicer/cartSlicer.js';
 
 
 function OrderPop(props){
+
+    const dispatch = useDispatch()
+
     const orderId = Date.now();
     function totalAmountFun(){
         return props.orderList?.reduce((total,itm) => (total += itm.price * itm.count),0)
     }
     let totalCount =  totalAmountFun();
 
-    const {orderList , setOrderList , setItemsList } = useItems();
-
-    console.log(orderList)
-
     function addOrderList(){
-        
+        console.log(props.orderList)
          const newList = {orderId:orderId,itemList:props.orderList,totalAmount:totalCount}
-        setOrderList(prev => [...prev,newList])
-        setItemsList([])
+        dispatch(getOrder(newList));
+        dispatch(clearCart());
         props.onClose()
     }
 
@@ -40,6 +41,7 @@ function OrderPop(props){
                                     <div className='flex justify-between '>
                                         <p className='text-gray-500'>{items.productName}</p>
                                         <p>{items.count}</p>
+                                        <p>{items.price}</p>
                                     </div>
                                 </div>       
                             

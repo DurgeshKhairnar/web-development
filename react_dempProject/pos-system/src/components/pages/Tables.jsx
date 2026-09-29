@@ -40,7 +40,7 @@ import Table from '../Table.jsx';
                 <h1 className='mt-1 font-bold text-2xl'>Tables Booking</h1>
                 <p className='text-gray-500 text-[13px]'>Reserv your table and enjoy a great dining experience!</p>
               <div className='flex w-full mt-3 justify-evenly'>
-                 <form onSubmit={handleSubmit} className=' px-2  w-100 bg-white border flex flex-col border-gray-200 p-2 justify-evenly'>
+                 <form onSubmit={handleSubmit} className=' px-2 m-1 w-140 bg-white border flex flex-col border-gray-200 p-2 justify-evenly'>
                     <div className='flex flex-col m-1'>
                         <label className='font-bold'>Customer Name</label>
                         <input
@@ -113,11 +113,20 @@ import Table from '../Table.jsx';
                     </div>
                     <div className='flex flex-col m-1'>
                         <label className='font-bold'>Booking Status</label>
-                        <input 
+                         <select 
                         name='status'
                         value={customerInfo.status}
                         onChange={handleChange}
-                        className='h-8 border border-gray-400 focus:border-2 focus:border-amber-500 focus:outline-none p-1'placeholder='Number of Person' />
+                        className='h-8 border border-gray-400 focus:border-2 focus:border-amber-500 focus:outline-none p-1'
+                        >
+                            <option>select status</option>
+                          {
+                            ["PENDING", "CONFIRMED", "CANCELLED", "COMPLETED"]?.map((status,index) => (
+                                <option key={index} value={status}>{status}</option>
+                            ))
+                          }
+                          
+                        </select>
                     </div>
                        <button 
                        type='submit'
@@ -125,8 +134,8 @@ import Table from '../Table.jsx';
                         Book Table
                         </button>
                    </form>
-                   <div className='bg-white w-100 border-gray-200 p-2 border'>
-                    <h1>Available Tables</h1>
+                   <div className='bg-white w-full m-1 border-gray-200 p-2 border'>
+                    <h1 className='font-bold'>Available Tables</h1>
                     <div className='flex'>
                     {
                         tables?.map((items,index) => (
