@@ -1,16 +1,15 @@
-// import { useItems } from '../context/contextCartItems.js';
 import { useState } from 'react';
 import  OrderPop from '../components/DashBoard_Components/OrderPop.jsx';
 import empty_orders from '../assets/empty_orders.png';
 import  { useSelector , useDispatch} from 'react-redux';
+import { clearCart } from '../redux/slicer/cartSlicer.js';
 
-function Carts(){
+function Carts({isEdited}){
 
-    // const { cartItemsList } = useItems();
-
+    const dispatch = useDispatch();
     const [isOrderPop , setOrderpPop] = useState(false);
     const carts = useSelector(state => state.carts.cart)
-
+    
     function emptyListIcon(){
         return (
             <div className='flex p-1 flex-col items-center justify-center bg-gray-100 rounded-full h-70'>
@@ -23,8 +22,12 @@ function Carts(){
     return (
          <div className={`min-h-screen w-90 p-2 flex flex-col ${(carts.length > 0) ? 'items-start' :'items-center'} justify-between bg-white`}>
            <div className='w-full'>
-                <p className='font-semibold text-[20px]'>Invoice</p>
-                
+                <div className='flex justify-between'>
+                    <p className='font-semibold text-[20px]'>Invoice</p>    
+                    <button 
+                    onClick={() => dispatch(clearCart())}
+                    className='cursor-pointer active:text-amber-500'>Clear</button>
+                </div>               
                 <div className='w-full p-2 h-100'>
                     {
                        (carts.length > 0) ? (carts.map((itm,idx) => (
@@ -57,7 +60,7 @@ function Carts(){
             className=' mx-2  h-10 w-full bg-amber-500 text-white font-bold rounded-[7px] 
             '>Total : {carts.reduce((total,item) => ( total += item.count * item.price),0)}</button>
           </div>
-          {(isOrderPop) ? <OrderPop onClose={() => setOrderpPop(prev => !prev)} orderList={carts}/> : <></> } 
+          {(isOrderPop) ? <OrderPop onClose={() => setOrderpPop(prev => !prev)} orderList={carts} isEdited={isEdited}/> : <></> } 
         </div>
     );
 }

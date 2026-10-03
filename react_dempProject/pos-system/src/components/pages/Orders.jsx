@@ -1,7 +1,10 @@
 import Search from '../Search.jsx';
+import {useEffect} from 'react';
 import { useDispatch , useSelector } from 'react-redux';
 import { useNavigate } from "react-router";
 import { updateCart } from '../../redux/slicer/cartSlicer.js';
+import { fetchOrder , CheckInOrder } from '../../API/orders.js';
+import { getOrder } from '../../redux/slicer/orderSlicer.js';
 
 function Orders(){
 
@@ -11,9 +14,30 @@ function Orders(){
       let navigate = useNavigate();
 
 
+    async function loadData(){
+        const data = await fetchOrder();
+        dispatch(getOrder(data));
+    }
+
+    useEffect(() =>{
+        loadData();
+    },[])
+
+
       const handlClick = (index) => {
-         dispatch(updateCart(orderList[index]?.itemList));
-         navigate('/')
+         navigate('/',{
+            state :{
+                isEdited :true,
+                orderList:orderList[index]
+            }
+         })
+      }
+
+      const handleCheckIn = async(id) => {
+         const response =  await CheckInOrder(id);
+         if(response.ok){
+            loadData();
+         }
       }
 
     return(
@@ -50,9 +74,10 @@ function Orders(){
                         </div>
                         <div className='flex items-center justify-evenly'>
                               <button 
-                            // onClick={addOrderList}
-                            className='h-10 w-full border-2 border-green-500 text-green-500 font-bold rounded-[5px] mt-2 cursor-pointer m-1'>Proceed</button>
+                             onClick={() => handleCheckIn(item._id)}
+                            className={`h-10 w-full border-2 ${item?.status == 'process' ? 'border-green-500' : 'border-amber-500'} ${item?.status == 'process' ? 'text-green-500' : 'text-amber-500'} font-bold rounded-[5px] mt-2 cursor-pointer m-1`}>{item?.status}</button>
                             <button 
+                            disabled={item?.status == 'check-In'}
                             onClick={() => handlClick(index)}
                             className='cursor-pointer p-2 bg-blue-500 rounded-[5px] m-1'><i className="ri-pencil-line text-white"></i></button>
                         </div>

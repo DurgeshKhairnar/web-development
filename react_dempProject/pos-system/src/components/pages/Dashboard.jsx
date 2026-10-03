@@ -1,7 +1,5 @@
 import Search from '../Search.jsx';
-// import { useItems } from '../../context/contextCartItems.js';
 import { useState , useEffect } from 'react'; 
-import AddProductPop from '../DashBoard_Components/AddProductPop.jsx';
 import { getProducts } from'../../API/product.js';
 import { fetchCategory } from'../../API/category.js';
 import Category from '../Category.jsx';
@@ -10,8 +8,13 @@ import { getProduct } from '../../redux/slicer/itemsSlicer.js';
 import { getCategory } from '../../redux/slicer/categorySlicer.js';
 import Carts from '../Carts.jsx';
 import { addItem ,incrementItem , decrementItem } from '../../redux/slicer/cartSlicer.js';
+import { useLocation } from 'react-router-dom';
 
 function Dashboard(){
+    // dispatch(updateCart(orderList[index]?.itemList));
+    const location = useLocation();
+
+    const { isEdited } = location.state ||  { isEdited : false };
 
     const products = useSelector(state => state.items.product)
     const carts = useSelector(state => state.carts.cart)
@@ -82,7 +85,7 @@ function addItems(item){
                     }
             </div>
             </div>
-            <Carts/>
+            <Carts isEdited={isEdited} />
         </div>
     );
 }
