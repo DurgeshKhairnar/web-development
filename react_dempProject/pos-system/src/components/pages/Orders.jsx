@@ -28,9 +28,10 @@ function Orders(){
          navigate('/',{
             state :{
                 isEdited :true,
-                orderList:orderList[index]
+                orderId: orderList[index]._id
             }
          })
+         dispatch(updateCart(orderList[index].itemList));
       }
 
       const handleCheckIn = async(id) => {

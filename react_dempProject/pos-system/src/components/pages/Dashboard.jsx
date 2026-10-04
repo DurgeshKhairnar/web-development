@@ -14,8 +14,8 @@ function Dashboard(){
     // dispatch(updateCart(orderList[index]?.itemList));
     const location = useLocation();
 
-    const { isEdited } = location.state ||  { isEdited : false };
-
+    const { isEdited , orderId } = location.state ||  { isEdited : false ,  orderId: undefined };
+    console.log(isEdited , orderId)
     const products = useSelector(state => state.items.product)
     const carts = useSelector(state => state.carts.cart)
 
@@ -24,6 +24,9 @@ function Dashboard(){
 
   useEffect(() => {
         async function load(){
+                 if (location.state) {
+                    window.history.replaceState({}, document.title);
+                }
                const data = await getProducts();
                const categoryData = await fetchCategory();
                dispatch(getProduct(data.data));
@@ -85,7 +88,7 @@ function addItems(item){
                     }
             </div>
             </div>
-            <Carts isEdited={isEdited} />
+            <Carts isEdited={isEdited} orderId = {orderId} />
         </div>
     );
 }

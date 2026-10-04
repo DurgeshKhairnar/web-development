@@ -1,6 +1,6 @@
 import { useDispatch , useSelector } from 'react-redux';
 import { addOrder } from '../../redux/slicer/orderSlicer.js';
-import { clearCart } from '../../redux/slicer/cartSlicer.js';
+import { clearCart , updateCart } from '../../redux/slicer/cartSlicer.js';
 import { createOrder , updateOrder } from '../../API/orders.js';
 
 
@@ -15,13 +15,13 @@ function OrderPop(props){
     let totalCount =  totalAmountFun();
 
    async function addOrderList(){
-        console.log(props.orderList)
-        if(props.isEdited){
-               
+     const newList = {orderId:orderId.toString(),itemList:props.orderList,totalAmount:totalCount,status:'process'}
+         if(props.isEdited){
+             await updateOrder(newList,props.orderId);
         }else{
-             const newList = {orderId:orderId.toString(),itemList:props.orderList,totalAmount:totalCount,status:'process'}
+            
              dispatch(addOrder(newList));
-            await createOrder(newList);
+             await createOrder(newList);
         }
         dispatch(clearCart());
         props.onClose()

@@ -4,7 +4,7 @@ import empty_orders from '../assets/empty_orders.png';
 import  { useSelector , useDispatch} from 'react-redux';
 import { clearCart } from '../redux/slicer/cartSlicer.js';
 
-function Carts({isEdited}){
+function Carts({isEdited , orderId }){
 
     const dispatch = useDispatch();
     const [isOrderPop , setOrderpPop] = useState(false);
@@ -60,7 +60,7 @@ function Carts({isEdited}){
             className=' mx-2  h-10 w-full bg-amber-500 text-white font-bold rounded-[7px] 
             '>Total : {carts.reduce((total,item) => ( total += item.count * item.price),0)}</button>
           </div>
-          {(isOrderPop) ? <OrderPop onClose={() => setOrderpPop(prev => !prev)} orderList={carts} isEdited={isEdited}/> : <></> } 
+          {(isOrderPop) ? <OrderPop onClose={() => setOrderpPop(prev => !prev)} orderList={carts} isEdited={isEdited} orderId={orderId} /> : <></> } 
         </div>
     );
 }
