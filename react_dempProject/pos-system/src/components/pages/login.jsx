@@ -3,10 +3,10 @@ import restro_bg_image from '../../assets/restro_bg_image.jpg';
 import hot_food from '../../assets/hot_food.png';
 import { useState } from 'react';
 import Signup from './Signup.jsx';
-
+import { useNavigate } from 'react-router-dom';
 
 function Login(){
-
+    const navigate = useNavigate();
     const [userName , setUserName] = useState('');
     const [password , setPassword] = useState('');
 
@@ -38,7 +38,7 @@ function Login(){
          console.log(jsonRespons)
          if(response.ok){
             toast.success('Login Successfully')
-              console.log('login');
+             navigate('/')
             // setUserName('');
             // setPassword('');
          }else{

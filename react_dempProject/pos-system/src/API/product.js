@@ -12,6 +12,7 @@ export const  postProducts = async(product) => {
             body:JSON.stringify(product),
         });
         const jsonResponse = await response.json();
+        console.log(jsonResponse)
         return jsonResponse;
     }catch (e){
         console.log(`post product ${e.message}`)
@@ -20,7 +21,6 @@ export const  postProducts = async(product) => {
 
 
 export const getProducts = async() => {
-    console.log('is called')
     try{
         const response = await fetch('http://localhost:3000/api/getAllProducts',{
             method:'GET',
@@ -30,6 +30,7 @@ export const getProducts = async() => {
             },
         });
         const jsonResponse = await response.json();
+            console.log(jsonResponse)
         return jsonResponse;
     }catch (e){
         console.log(`get product ${e.message}`)

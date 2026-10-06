@@ -23,7 +23,7 @@ function SideBar(){
                     <NavLink to='/o' className={({isActive}) =>
                     isActive ?  'text-white bg-amber-500 p-3  font-semibold ': 'text-black font-semibold p-3'}><i className="ri-file-chart-line"></i> Reports</NavLink>
 
-                    <NavLink to='/or' className={({isActive}) =>
+                    <NavLink to='/setting' className={({isActive}) =>
                     isActive ?  'text-white bg-amber-500 p-3  font-semibold ': 'text-black font-semibold p-3'}><i className="ri-tools-line"></i> Setting</NavLink>
                 </div>
             </div>

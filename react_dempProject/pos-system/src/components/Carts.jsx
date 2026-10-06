@@ -56,7 +56,11 @@ function Carts({isEdited , orderId }){
                    <p className='p-1 bg-gray-200 w-23 flex items-center justify-center rounded-xl font-semibold'>QR Code</p>
             </div>
             <button 
-            onClick={()=> setOrderpPop(prev => !prev)}
+            onClick={()=>{
+                if(carts.length > 0){
+                    setOrderpPop(prev => !prev);
+                }
+            }}
             className=' mx-2  h-10 w-full bg-amber-500 text-white font-bold rounded-[7px] 
             '>Total : {carts.reduce((total,item) => ( total += item.count * item.price),0)}</button>
           </div>
