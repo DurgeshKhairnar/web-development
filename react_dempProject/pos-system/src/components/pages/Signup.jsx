@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import toast , { Toaster } from 'react-hot-toast';
+import api from '../../API/axios.js';
 
 function Signup(){
 

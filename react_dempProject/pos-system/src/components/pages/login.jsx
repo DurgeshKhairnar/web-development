@@ -4,6 +4,7 @@ import hot_food from '../../assets/hot_food.png';
 import { useState } from 'react';
 import Signup from './Signup.jsx';
 import { useNavigate } from 'react-router-dom';
+import api from '../../API/axios.js';
 
 function Login(){
     const navigate = useNavigate();
@@ -24,19 +25,11 @@ function Login(){
     async function login(){
         setLoading('Loading...')
       try{
-          const response = await fetch('http://localhost:3000/api/loginUser',
-            {
-                method:'POST',
-                credentials: "include",
-                headers:{
-                    'Content-Type':'application/json'
-                },
-                body:JSON.stringify({userName:userName , password:password})
-            }
-        );
-         const jsonRespons = await response.json();
-         console.log(jsonRespons)
-         if(response.ok){
+          const response = await api.post('/loginUser',{
+            userName:userName,
+            password:password
+          });
+         if(response.status == 201){
             toast.success('Login Successfully')
              navigate('/')
             // setUserName('');
