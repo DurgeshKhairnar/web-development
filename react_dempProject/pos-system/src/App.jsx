@@ -32,7 +32,7 @@ function App() {
     
             <Route path="/login" element={<Login />} />
 
-            {/* <Route element={<ProtectedRoute />}> */}
+            <Route element={<ProtectedRoute />}>
              <Route element={<Layout />}>
 
                 <Route path="/" element={<Dashboard />} />
@@ -43,7 +43,7 @@ function App() {
                 <Route path="/setting" element={<Setting />} />
 
              </Route>
-           {/* </Route>  */}
+           </Route> 
 
         </Routes>
     );

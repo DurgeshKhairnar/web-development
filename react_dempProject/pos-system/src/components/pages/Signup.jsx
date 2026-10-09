@@ -19,20 +19,10 @@ function Signup(){
       async function Signin(){
         setLoading('Loading...')
         try{
-             const response = await fetch('http://localhost:3000/api/registerUser',
-            {
-                method:'POST',
-                credentials: "include",
-                headers:{
-                    'Content-Type':'application/json'
-                },
-                body:JSON.stringify({userName:userName , password:password})
-            }
-                    
-                );
-                const jsonRespons = await response.json();
-                // console.log(`response = ${jsonRespons.message}`);
-                if(response.ok){
+             const response = await api.post('/registerUser',
+                {userName:userName , password:password}
+             )
+                if(response.status == 201){
                     console.log(jsonRespons);
                     toast.success('Sign up  Successfully')
                     setUserName('');
