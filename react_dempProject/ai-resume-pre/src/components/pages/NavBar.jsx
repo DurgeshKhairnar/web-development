@@ -34,6 +34,7 @@ function NavBar(){
                     console.log('response satus code',response.status)
                     if(response.ok){
                         setIsLogin(false)
+                         navigate('/')
                     }
             }catch (e){
                     console.log(`log out error ${e}`)

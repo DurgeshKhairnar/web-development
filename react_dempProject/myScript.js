@@ -159,20 +159,32 @@
 
 
 
-let arr = [ 1 , 4 , 2 , 3 , 8 , 6 , 5];
-let largest = 0;
-let secondeLargest = 0;
+// let arr = [ 1 , 4 , 2 , 3 , 8 , 6 , 5];
+// let largest = 0;
+// let secondeLargest = 0;
 
-for(let i = 0; i < arr.length; i++ ){
-    if(largest < arr[i]){
-         secondeLargest = largest
-        largest = arr[i];
+// for(let i = 0; i < arr.length; i++ ){
+//     if(largest < arr[i]){
+//          secondeLargest = largest
+//         largest = arr[i];
+//     }
+//     if(largest < arr[i] && arr[i] !== largest){
+//         secondeLargest = arr[i];   
+//     }
+// }
+
+// console.log(largest)
+// console.log(secondeLargest)
+
+
+
+
+function demo(){
+    if(true){
+        var age = 24;
     }
-    if(largest < arr[i] && arr[i] !== largest){
-        secondeLargest = arr[i];   
-    }
+    console.log(age)
 }
 
-console.log(largest)
-console.log(secondeLargest)
+demo();
 

@@ -5,8 +5,10 @@ import ask from '../../assets/ask.png';
 import achievement  from '../../assets/achievement.png';
 import rising from '../../assets/rising.png';
 import protection from '../../assets/protection.png';
+import { useNavigate } from 'react-router-dom';
 
 function HomeScreen(){
+    const navigate = useNavigate();
     return (
         <div className='mx-auto min-h-screen max-w-[1000px] p-2'>
             <div className='w-full h-70 p-1 flex justify-between'>
@@ -19,8 +21,12 @@ function HomeScreen(){
                           <p className='font-semibold text-3xl'>Analyze Your Resume.</p>
                            <p className='font-semibold text-3xl text-purple-500'>Ace Your Interview.</p>
                         </div>
-                     <p className='text-gray-500 text-[15px]'>upload your resume and get-AI analysis, personalized feedback, and interview question tailored to your profile.</p>
-                     <button className='h-10 w-full bg-purple-500 rounded-[5px] font-semibold text-white'>Upload Your Resume</button>
+                     <p className='text-gray-500 text-[15px] '>upload your resume and get-AI analysis, personalized feedback, and interview question tailored to your profile.</p>
+                     <button 
+                     onClick={() => {
+                        navigate('/uploadResume')
+                     }}
+                     className='h-10 w-full bg-purple-500 rounded-[5px] font-semibold text-white cursor-pointer'>Upload Your Resume</button>
                 </div>
                 <div className="w-full h-[268px] p-1 m-0.5">
                     <img
